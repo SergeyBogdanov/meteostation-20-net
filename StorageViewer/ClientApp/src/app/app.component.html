@@ -343,11 +343,11 @@
 <div>
   You have entered: {{ enteredText }}
 </div>
-<div>
-  <span><label for="fromDate">From:</label><date-control labeledId="fromDate" [(value)]="fromDateFilter"></date-control></span>
-  <span><label for="toDate">To:</label><date-control labeledId="toDate" [(value)]="toDateFilter"></date-control></span>
-  <span><input type="button" (click)="onSearch()" value="Request" [disabled]="!(fromDateFilter || toDateFilter)"/></span>
-</div>
+<form class="row row-cols-auto">
+  <span class="row"><label for="fromDate" class="col-form-label col-2">From:</label><date-control labeledId="fromDate" [(value)]="fromDateFilter" class="col-10"></date-control></span>
+  <span class="row"><label for="toDate" class="col-form-label col-2">To:</label><date-control labeledId="toDate" [(value)]="toDateFilter" class="col-10"></date-control></span>
+  <span><input type="button" (click)="onSearch()" value="Request" [disabled]="!(fromDateFilter || toDateFilter)" class="btn btn-primary"/></span>
+</form>
 <history-list #historyList></history-list>
 
 <router-outlet />
