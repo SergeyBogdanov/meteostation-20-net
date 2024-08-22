@@ -1,0 +1,20 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Device Id</th>
+            <th>Timestamp</th>
+            <th>Internal Temperature (C)</th>
+            <th>Internal Humidity (%)</th>
+            <th>Pressure (mm Hg)</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider1 table-bordered1">
+        @for (meteoRow of historyRows; track meteoRow.deviceId + '_' + meteoRow.recordTimestamp) {
+            <tr history-item #meteoRowElement [item]="meteoRow" (chosen)="onChosen(meteoRow)"></tr>
+        } @empty {
+        <tr>
+            <td colspan="5" class="emptyCell">No data to display</td>
+        </tr>
+        }
+    </tbody>
+</table>
