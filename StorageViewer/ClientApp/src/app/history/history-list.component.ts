@@ -20,7 +20,12 @@ export class HistoryListComponent {
     async searchHistory(options: HistoryFilterOptionsModel): Promise<void> {
         //console.log(`Make the search operation here: ${this.fromDateFilter ? JSON.stringify(this.fromDateFilter) : 'n/a'} - ${this.toDateFilter ? JSON.stringify(this.toDateFilter) : 'n/a'}`);
         if (options.fromDate || options.toDate) {
-            const res = await lastValueFrom(this.client.get('api/History/all'));
+            const res = await lastValueFrom(this.client.get('api/History', {
+                params: {
+                    fromDate: options.fromDate?.getTime() || Date.now(),
+                    toDate: options.toDate?.getTime() || (Date.now() + 24 * 60 * 60 * 1000)
+                }
+            }));
             if (Array.isArray(res)) {
                 this.historyRows = res;
             }
