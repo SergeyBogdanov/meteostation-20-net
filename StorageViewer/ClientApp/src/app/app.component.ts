@@ -5,11 +5,12 @@ import {FormsModule} from '@angular/forms';
 
 import { HistoryListComponent } from './history/history-list.component'
 import { DateControlComponent } from './controls/date-control.component'
+import { FilterPanelComponent } from './controls/filter-panel.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, HistoryListComponent, DateControlComponent],
+  imports: [RouterOutlet, FormsModule, HistoryListComponent, DateControlComponent, FilterPanelComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

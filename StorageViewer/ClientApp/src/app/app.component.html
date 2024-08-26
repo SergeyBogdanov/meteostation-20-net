@@ -343,11 +343,13 @@
 <div>
   You have entered: {{ enteredText }}
 </div>
-<form class="row row-cols-auto">
-  <span class="row"><label for="fromDate" class="col-form-label col-2">From:</label><date-control labeledId="fromDate" [(value)]="fromDateFilter" class="col-10"></date-control></span>
-  <span class="row"><label for="toDate" class="col-form-label col-2">To:</label><date-control labeledId="toDate" [(value)]="toDateFilter" class="col-10"></date-control></span>
-  <span><input type="button" (click)="onSearch()" value="Request" [disabled]="!(fromDateFilter || toDateFilter)" class="btn btn-primary"/></span>
-</form>
+<filter-panel title1="Search in history measures">
+  <form class="row row-cols-auto">
+    <span class="row col-4"><span class="col-2"><label for="fromDate" class="col-form-label">From:</label></span><span class="col-10"><date-control labeledId="fromDate" [(value)]="fromDateFilter"></date-control></span></span>
+    <span class="row col-4"><span class="col-2"><label for="toDate" class="col-form-label">To:</label></span><span class="col-10"><date-control labeledId="toDate" [(value)]="toDateFilter"></date-control></span></span>
+    <span class="col-4"><input type="button" (click)="onSearch()" value="Request" [disabled]="!(fromDateFilter || toDateFilter)" class="btn btn-primary"/></span>
+  </form>
+</filter-panel>
 <history-list #historyList></history-list>
 
 <router-outlet />
