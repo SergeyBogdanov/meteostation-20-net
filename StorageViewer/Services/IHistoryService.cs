@@ -4,5 +4,5 @@ namespace StorageViewer.Services;
 
 public interface IHistoryService
 {
-    IEnumerable<DataBlockModel> GetHistoryInformation(DateTimeOffset from, DateTimeOffset to);
+    IAsyncEnumerable<DataBlockModel> GetHistoryInformation(DateTimeOffset from, DateTimeOffset to);
 }

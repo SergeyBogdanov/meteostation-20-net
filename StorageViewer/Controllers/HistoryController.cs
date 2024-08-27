@@ -48,9 +48,8 @@ public class HistoryController : ControllerBase
     }
 
     [HttpGet()]
-    public IEnumerable<DataBlockModel> GetHistoryPart(long? fromDate, long? toDate)
+    public async IAsyncEnumerable<DataBlockModel> GetHistoryPart(long? fromDate, long? toDate)
     {
-        IEnumerable<DataBlockModel> result = [];
         if (fromDate!=null || toDate!=null)
         {
             const int DEFAULT_PERIOD_MS = 24 * 60 * 60 * 1000;
@@ -58,11 +57,13 @@ public class HistoryController : ControllerBase
             long toNormalizedMs = toDate ?? fromNormalizedMs + DEFAULT_PERIOD_MS;
             long maxDate = Math.Max(fromNormalizedMs, toNormalizedMs);
             long minDate = Math.Min(fromNormalizedMs, toNormalizedMs);
-            result = _historyService.GetHistoryInformation(
+            await foreach(var entity in  _historyService.GetHistoryInformation(
                 DateTimeOffset.FromUnixTimeMilliseconds(minDate), 
-                DateTimeOffset.FromUnixTimeMilliseconds(maxDate).AddDays(1));
+                DateTimeOffset.FromUnixTimeMilliseconds(maxDate).AddDays(1)))
+            {
+                yield return entity;
+            }
         }
-        return result;
     }
 
 }

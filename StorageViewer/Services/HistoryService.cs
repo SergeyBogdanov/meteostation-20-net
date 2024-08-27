@@ -1,31 +1,51 @@
+using System.Text.Json;
+using Azure.Data.Tables;
 using StorageViewer.Models;
 
 namespace StorageViewer.Services;
 
 public class HistoryService: IHistoryService
 {
-    public IEnumerable<DataBlockModel> GetHistoryInformation(DateTimeOffset from, DateTimeOffset to)
+    private readonly IConfiguration _configuration;
+    private readonly ILogger<HistoryService> _logger;
+
+    private TableClient? _currentClient = null;
+
+    public HistoryService(IConfiguration configuration, ILogger<HistoryService> logger)
     {
-            // const int DEFAULT_PERIOD_MS = 24 * 60 * 60 * 1000;
-            // long fromNormalizedMs = fromDate ?? (toDate ?? DEFAULT_PERIOD_MS) - DEFAULT_PERIOD_MS;
-            // long toNormalizedMs = toDate ?? fromNormalizedMs + DEFAULT_PERIOD_MS;
-            // long maxDate = Math.Max(fromNormalizedMs, toNormalizedMs);
-            // long currentDate = Math.Min(fromNormalizedMs, toNormalizedMs);
-            // DateTime unixDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            DateTimeOffset current = from;
-            while (current < to)
-            {
-                yield return new DataBlockModel {
-                    RecordTimestamp = current.ToString("u"),
-                    DeviceId = "Dev1",
-                    StoredData = new MeteoDataModel {
-                        TemperatureInternal = Random.Shared.Next(15, 28),
-                        HumidityInternal = Random.Shared.Next(25, 100),
-                        PressureMmHg = Random.Shared.Next(750, 778),
-                    }
-                };
-                current = current.AddDays(1);
-            }
+        _configuration = configuration;
+        _logger = logger;
     }
 
+    public async IAsyncEnumerable<DataBlockModel> GetHistoryInformation(DateTimeOffset from, DateTimeOffset to)
+    {
+        var tableClient = GetTableClient();
+        await foreach(var entity in tableClient.QueryAsync<TableEntity>(
+            $"PartitionKey eq '{_configuration["Services:History:PartitionKey"]}' and Timestamp ge datetime'{from:o}' and Timestamp le datetime'{to:o}'"))
+        {
+            if (!String.IsNullOrEmpty(entity.GetString("payload")))
+            {
+                var deserialized = JsonSerializer.Deserialize<HistoryRecord>(entity.GetString("payload") ?? "");
+                yield return new DataBlockModel {
+                    RecordTimestamp = deserialized?.MessageDate?.ToString("u") ?? "n/a",
+                    DeviceId = deserialized?.DeviceId ?? "n/a",
+                    StoredData = new MeteoDataModel {
+                        TemperatureInternal = deserialized?.IotData?.TemperatureInternal ?? 0.0,
+                        HumidityInternal = deserialized?.IotData?.HumidityInternal ?? 0.0,
+                        PressurePa = deserialized?.IotData?.PressureInternal ?? 0.0,
+                    }
+                };
+            }
+        }
+    }
+
+    private TableClient GetTableClient()
+    {
+        if (_currentClient == null)
+        {
+            _currentClient = new TableClient(_configuration["Services:History:StorageConnectionString"], 
+                                                _configuration["Services:History:StorageTableName"]);
+        }
+        return _currentClient;
+    }
 }
