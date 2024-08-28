@@ -15,6 +15,7 @@ import { FilterPanelComponent } from './controls/filter-panel.component';
 })
 export class AppComponent {
   title = 'ClientApp';
+  isSearchOperationActive: boolean = false;
   fromDateFilter?: Date;
   toDateFilter?: Date;
   @ViewChild('historyList') historyListElement?: HistoryListComponent;
@@ -24,5 +25,9 @@ export class AppComponent {
       fromDate: this.fromDateFilter,
       toDate: this.toDateFilter
     });
+  }
+
+  onChangeHistorySearch(isSearching: boolean) {
+    this.isSearchOperationActive = isSearching;
   }
 }

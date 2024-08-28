@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 import { HistoryItemComponent } from './history-item.component';
-import { lastValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { HistoryFilterOptionsModel } from './shared/history-filter-options.model';
+import { HistoryService } from './shared/history.service';
+import { MeteoDataItemModel } from './shared/meteo-data-item.model';
 
 @Component({
   selector: 'history-list',
@@ -12,23 +12,20 @@ import { HistoryFilterOptionsModel } from './shared/history-filter-options.model
   styleUrl: 'history-list.component.css'
 })
 export class HistoryListComponent {
-    historyRows: any[] = [];
+    historyRows: MeteoDataItemModel[] = [];
+    actionInProgress: boolean = false;
+    @Output() changeSearchStatus = new EventEmitter<boolean>();
     @ViewChildren('meteoRowElement') historyRowElements?: QueryList<HistoryItemComponent>;
   
-    constructor(private client : HttpClient) {}
+    constructor(private historyService: HistoryService) {}
 
     async searchHistory(options: HistoryFilterOptionsModel): Promise<void> {
-        //console.log(`Make the search operation here: ${this.fromDateFilter ? JSON.stringify(this.fromDateFilter) : 'n/a'} - ${this.toDateFilter ? JSON.stringify(this.toDateFilter) : 'n/a'}`);
         if (options.fromDate || options.toDate) {
-            const res = await lastValueFrom(this.client.get('api/History', {
-                params: {
-                    fromDate: options.fromDate?.getTime() || Date.now(),
-                    toDate: options.toDate?.getTime() || (Date.now() + 24 * 60 * 60 * 1000)
-                }
-            }));
-            if (Array.isArray(res)) {
-                this.historyRows = res;
-            }
+
+            this.notifySearchStatus(true);
+            this.historyRows = await this.historyService.getHistory(options.fromDate ?? new Date(),
+                                                new Date((options.toDate ?? new Date()).getTime() + 24 * 60 * 60 * 1000));
+            this.notifySearchStatus(false);
         }
     }
 
@@ -38,5 +35,10 @@ export class HistoryListComponent {
             element.highlighted = element.item === dataItem;
           });
         }
+    }
+
+    private notifySearchStatus(isSearching: boolean): void {
+        this.actionInProgress = isSearching;
+        this.changeSearchStatus.emit(isSearching);
     }
 };
