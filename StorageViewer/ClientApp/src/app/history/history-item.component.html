@@ -1,5 +1,5 @@
     <td (click)="onTextClick()" [class.item-highlighted]="highlighted">{{ item.deviceId }}</td>
-    <td (click)="onTextClick()" [class.item-highlighted]="highlighted">{{ item.recordTimestamp }}</td>
+    <td (click)="onTextClick()" [class.item-highlighted]="highlighted">{{ item.recordTimestamp | dateFormatting:'full' }}</td>
     <td (click)="onTextClick()" [class.item-highlighted]="highlighted" class="numeric-cell">{{ item.storedData.temperatureInternal | number:'1.0-1' }}</td>
     <td (click)="onTextClick()" [class.item-highlighted]="highlighted" class="numeric-cell">{{ item.storedData.humidityInternal | number:'1.0-1' }}</td>
     <td (click)="onTextClick()" [class.item-highlighted]="highlighted" class="numeric-cell">{{ item.storedData.pressureMmHg | number:'1.0-1' }}</td>
