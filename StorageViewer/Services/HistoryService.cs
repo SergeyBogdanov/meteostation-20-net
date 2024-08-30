@@ -41,11 +41,8 @@ public class HistoryService: IHistoryService
 
     private TableClient GetTableClient()
     {
-        if (_currentClient == null)
-        {
-            _currentClient = new TableClient(_configuration["Services:History:StorageConnectionString"], 
-                                                _configuration["Services:History:StorageTableName"]);
-        }
+        _currentClient ??= new TableClient(_configuration["Services:History:StorageConnectionString"], 
+                                            _configuration["Services:History:StorageTableName"]);
         return _currentClient;
     }
 }

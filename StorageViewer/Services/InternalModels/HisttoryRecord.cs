@@ -1,8 +1,1 @@
-internal class HistoryRecord
-{
-    public DateTimeOffset? MessageDate { get;set; }
-
-    public string? DeviceId { get;set; }
-
-    public HistoryIotData? IotData { get; set; }
-}
+internal record class HistoryRecord(DateTimeOffset? MessageDate, string? DeviceId, HistoryIotData? IotData);
