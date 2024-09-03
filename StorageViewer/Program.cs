@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using StorageViewer.Configuration;
+using StorageViewer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +13,8 @@ builder.Services.AddSpaStaticFiles(configuration =>
 {
     configuration.RootPath = "ClientApp/dist";
 });
+
+builder.Services.AddHostedService<ExternalListenerService>();
 
 var app = builder.Build();
 
