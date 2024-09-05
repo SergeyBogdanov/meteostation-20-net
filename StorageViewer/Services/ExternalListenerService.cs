@@ -8,11 +8,13 @@ internal class ExternalListenerService : BackgroundService
 {
     private readonly ILogger<ExternalListenerService> _logger;
     private readonly IConfiguration _configuration;
+    private readonly IInternalExchangeService _exchangeService;
 
-    public ExternalListenerService(IConfiguration configuration, ILogger<ExternalListenerService> logger) 
+    public ExternalListenerService(IConfiguration configuration, IInternalExchangeService exchangeService, ILogger<ExternalListenerService> logger) 
     {
         _logger = logger;
         _configuration = configuration;
+        _exchangeService = exchangeService;
     }
 
     async protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -29,7 +31,8 @@ internal class ExternalListenerService : BackgroundService
                         DataBlockModel data = HistoryRecordSerializer.DeserializeWMeteoData(evt.Data.EnqueuedTime, 
                                     evt.Data.SystemProperties["iothub-connection-device-id"]?.ToString(),
                                     evt.Data.EventBody.ToString());
-                        _logger.LogInformation($"Received event: body: [{evt.Data.EventBody}] prop: {evt.Data.Properties.Keys.FirstOrDefault()}, sys props: {String.Join(", ", evt.Data.SystemProperties.Keys)}, device id: [{data.DeviceId}]");
+                        _logger.LogInformation($"Received event: body: [{evt.Data.EventBody}] temp: {data.StoredData.TemperatureInternal}, device id: [{data.DeviceId}]");
+                        _exchangeService.Publish(data);
                     }
                 }
             }

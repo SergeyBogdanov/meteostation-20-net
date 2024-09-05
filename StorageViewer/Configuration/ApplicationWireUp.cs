@@ -6,5 +6,6 @@ public static class ApplicationWireUp
 {
     public static IServiceCollection AddDependencies(
             this IServiceCollection services) =>
-        services.AddScoped<IHistoryService, HistoryService>();
+        services.AddScoped<IHistoryService, HistoryService>()
+                .AddSingleton<IInternalExchangeService, InternalExchangeService>();
 }
