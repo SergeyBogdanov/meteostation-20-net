@@ -1,12 +1,13 @@
 
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
+using StorageViewer.Utils;
 
 namespace StorageViewer.Services;
 
 internal class InternalExchangeService : IInternalExchangeService
 {
-    private record class ListSubscription<TData>(Type TypeInUse, object SubscriptionToken) : IInternalExchangeService.Subscription<TData>(TypeInUse, SubscriptionToken)
+    private class ListSubscription<TData>: IInternalExchangeService.Subscription<TData>
     {
         private readonly ConcurrentQueue<TData> dataToExpose = new ConcurrentQueue<TData>();
         private readonly SemaphoreSlim dataReadySignal = new SemaphoreSlim(0, 1);
@@ -20,12 +21,11 @@ internal class InternalExchangeService : IInternalExchangeService
                     await dataReadySignal.WaitAsync(cancelToken);
                 }
                 catch(OperationCanceledException) {}
-                while (!cancelToken.IsCancellationRequested && !dataToExpose.IsEmpty)
+
+                Queue<TData> dataLocalCopy = new Queue<TData>(ExtractData());
+                while (!cancelToken.IsCancellationRequested && dataLocalCopy.Count > 0)
                 {
-                    if (dataToExpose.TryDequeue(out TData? item))
-                    {
-                        yield return item;
-                    }
+                    yield return dataLocalCopy.Dequeue();
                 }
             }
         }
@@ -35,10 +35,22 @@ internal class InternalExchangeService : IInternalExchangeService
             dataToExpose.Enqueue(item);
             dataReadySignal.Release();
         }
+
+        private IEnumerable<TData> ExtractData()
+        {
+            while(!dataToExpose.IsEmpty)
+            {
+                if (dataToExpose.TryDequeue(out TData? item))
+                {
+                    yield return item;
+                }
+            }
+        }
     }
 
     private readonly Dictionary<Type, List<object>> subscriptions = [];
     private readonly ILogger<InternalExchangeService> _logger;
+    private readonly DisposibleLock subscriptionsLock = new();
 
     public InternalExchangeService(ILogger<InternalExchangeService> logger)
     {
@@ -47,25 +59,28 @@ internal class InternalExchangeService : IInternalExchangeService
 
     public void Publish<TData>(TData data)
     {
+        using var lockKey = subscriptionsLock.EnterReadLock();
         if (data != null && subscriptions.TryGetValue(typeof(TData), out List<object>? handlers))
         {
-            foreach(ListSubscription<TData> handler in handlers)
+            foreach(var handler in handlers.Cast<ListSubscription<TData>>())
             {
                 handler.EnqueueData(data);
             }
         }
     }
 
-    public IInternalExchangeService.Subscription<TData> Subscribe<TData>(Action<TData> dataConsuner)
+    public IInternalExchangeService.Subscription<TData> Subscribe<TData>()
     {
-        var handler = new ListSubscription<TData>(typeof(TData), dataConsuner);
+        using var lockKey = subscriptionsLock.EnterWriteLock();
+        var handler = new ListSubscription<TData>();
         EnsureHandlerList(typeof(TData)).Add(handler);
         return handler;
     }
 
     public void Unsubscribe<TData>(IInternalExchangeService.Subscription<TData> token)
     {
-        if (subscriptions.TryGetValue(token.TypeInUse, out List<object>? handlers))
+        using var lockKey = subscriptionsLock.EnterWriteLock();
+        if (subscriptions.TryGetValue(typeof(TData), out List<object>? handlers))
         {
             handlers.RemoveAll(handler => handler == (object)token);
         }

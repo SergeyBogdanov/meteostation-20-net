@@ -1,6 +1,5 @@
 using System.Net.WebSockets;
 using System.Text;
-using System.Text.Encodings.Web;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using StorageViewer.Models;
@@ -20,14 +19,12 @@ public class DuplexTransportController : ControllerBase
     }
 
     [Route("wsTransport")]
-    public async Task AcceptConnect()
+    public async Task AcceptConnect(CancellationToken cancelToken)
     {
         if (HttpContext.WebSockets.IsWebSocketRequest)
         {
-            CancellationToken cancelToken = CancellationToken.None;
             using var webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
-            await SendToWebSocket(webSocket, """{ "msg": "Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!" }""", cancelToken);
-            var subscription = _exchangeService.Subscribe<DataBlockModel>(data => {});
+            var subscription = _exchangeService.Subscribe<DataBlockModel>();
             await foreach(DataBlockModel data in subscription.ReadAsync(cancelToken))
             {
                 await SendToWebSocket(webSocket, JsonSerializer.Serialize(data), cancelToken);
