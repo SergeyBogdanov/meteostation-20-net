@@ -9,6 +9,7 @@ import { FilterPanelComponent } from './controls/filter-panel.component';
 import { MeteoDataItemModel } from './history/shared/meteo-data-item.model';
 import { DateFormattingPipe } from './controls/date-formatting.pipe';
 import { DecimalPipe } from '@angular/common';
+import { MeteoDataItemFactory } from './history/shared/meteo-data-item.factory';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,8 @@ export class AppComponent {
   fromDateFilter?: Date;
   toDateFilter?: Date;
   @ViewChild('historyList') historyListElement?: HistoryListComponent;
+
+  constructor(private meteoInfoFactory: MeteoDataItemFactory) {}
 
   async onSearch() {
     await this.historyListElement?.searchHistory({
@@ -60,8 +63,6 @@ export class AppComponent {
 
   private consumeWebSocketInfo(info: any)
   {
-    const typedInfo : MeteoDataItemModel = new MeteoDataItemModel(info.DeviceId, info.RecordTimestamp,
-          info.StoredData.TemperatureInternal, info.StoredData.HumidityInternal, info.StoredData.PressureMmHg);
-    this.currentInfo = typedInfo;
+    this.currentInfo = this.meteoInfoFactory.restoreFromServerObject(info);
   }
 }

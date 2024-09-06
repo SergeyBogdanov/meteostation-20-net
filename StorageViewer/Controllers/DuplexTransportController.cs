@@ -11,6 +11,10 @@ public class DuplexTransportController : ControllerBase
 {
     private readonly IInternalExchangeService _exchangeService;
     private readonly ILogger<DuplexTransportController> _logger;
+    private readonly JsonSerializerOptions _webSocketSerializeOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
 
     public DuplexTransportController(IInternalExchangeService exchangeService, ILogger<DuplexTransportController> logger)
     {
@@ -27,7 +31,7 @@ public class DuplexTransportController : ControllerBase
             var subscription = _exchangeService.Subscribe<DataBlockModel>();
             await foreach(DataBlockModel data in subscription.ReadAsync(cancelToken))
             {
-                await SendToWebSocket(webSocket, JsonSerializer.Serialize(data), cancelToken);
+                await SendToWebSocket(webSocket, JsonSerializer.Serialize(data, _webSocketSerializeOptions), cancelToken);
             }
             _exchangeService.Unsubscribe(subscription);
             await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Bye", CancellationToken.None);
