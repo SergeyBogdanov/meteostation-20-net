@@ -49,6 +49,7 @@ internal class InternalExchangeService : IInternalExchangeService
     }
 
     private readonly Dictionary<Type, List<object>> subscriptions = [];
+    private readonly Dictionary<Type, object> recentData = [];
     private readonly ILogger<InternalExchangeService> _logger;
     private readonly DisposibleLock subscriptionsLock = new();
 
@@ -59,12 +60,16 @@ internal class InternalExchangeService : IInternalExchangeService
 
     public void Publish<TData>(TData data)
     {
-        using var lockKey = subscriptionsLock.EnterReadLock();
-        if (data != null && subscriptions.TryGetValue(typeof(TData), out List<object>? handlers))
+        if (data != null)
         {
-            foreach(var handler in handlers.Cast<ListSubscription<TData>>())
+            using var lockKey = subscriptionsLock.EnterReadLock();
+            recentData[typeof(TData)] = data;
+            if (subscriptions.TryGetValue(typeof(TData), out List<object>? handlers))
             {
-                handler.EnqueueData(data);
+                foreach(var handler in handlers.Cast<ListSubscription<TData>>())
+                {
+                    handler.EnqueueData(data);
+                }
             }
         }
     }
@@ -74,6 +79,7 @@ internal class InternalExchangeService : IInternalExchangeService
         using var lockKey = subscriptionsLock.EnterWriteLock();
         var handler = new ListSubscription<TData>();
         EnsureHandlerList(typeof(TData)).Add(handler);
+        TrySendRecentData(handler);
         return handler;
     }
 
@@ -94,5 +100,13 @@ internal class InternalExchangeService : IInternalExchangeService
             subscriptions[type] = handlers;
         }
         return handlers;
+    }
+
+    private void TrySendRecentData<TData>(ListSubscription<TData> handler)
+    {
+        if (recentData.TryGetValue(typeof(TData), out object? data))
+        {
+            handler.EnqueueData((TData)data);
+        }
     }
 }
