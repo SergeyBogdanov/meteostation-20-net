@@ -34,4 +34,9 @@
 </filter-panel>
 <history-list #historyList (changeSearchStatus)="onChangeHistorySearch($event)"></history-list>
 
+<div>
+  <span><a class="btn btn-info" routerLink="/actual" routerLinkActive="disabled">Actual</a></span>
+  <span><a class="btn btn-info" routerLink="/history" routerLinkActive="disabled">History</a></span>
+</div>
+
 <router-outlet />

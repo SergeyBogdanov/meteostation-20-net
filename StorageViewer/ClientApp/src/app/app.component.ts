@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
@@ -16,7 +16,8 @@ import { MeteoDataItemFactory } from './history/shared/meteo-data-item.factory';
   standalone: true,
   imports: [RouterOutlet, FormsModule, HistoryListComponent,
             DateControlComponent, FilterPanelComponent, 
-            DateFormattingPipe, DecimalPipe],
+            DateFormattingPipe, DecimalPipe,
+            RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
