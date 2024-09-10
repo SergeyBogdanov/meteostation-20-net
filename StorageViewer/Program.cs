@@ -49,7 +49,10 @@ app.UseEndpoints(routeBuilder => routeBuilder.MapDefaultControllerRoute());
 app.UseSpa(spaBuilder => {
     spaBuilder.Options.SourcePath = Path.Combine(builder.Environment.ContentRootPath, "ClientApp");
     //spaBuilder.UseAngularCliServer("start");
-    spaBuilder.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+    if (app.Environment.IsDevelopment())
+    {
+        spaBuilder.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+    }
 });
 
 app.Run();
