@@ -2,3 +2,4 @@ NgStorageViewer/
 StorageViewer/bin/
 StorageViewer/obj/
 StorageViewer/ClientApp/.vscode/
+StorageViewer/setvars.bat

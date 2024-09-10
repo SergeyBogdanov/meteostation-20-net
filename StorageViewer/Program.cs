@@ -16,6 +16,8 @@ builder.Services.AddSpaStaticFiles(configuration =>
 
 builder.Services.AddHostedService<ExternalListenerService>();
 
+builder.Configuration.AddEnvironmentVariables("MeteoSettings_");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
