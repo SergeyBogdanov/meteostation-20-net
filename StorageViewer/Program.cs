@@ -11,7 +11,7 @@ builder.Services.AddDependencies();
 
 builder.Services.AddSpaStaticFiles(configuration =>
 {
-    configuration.RootPath = "client-app/browser";
+    configuration.RootPath = "wwwroot/client-app/browser";
 });
 
 builder.Services.AddHostedService<ExternalListenerService>();
@@ -19,6 +19,9 @@ builder.Services.AddHostedService<ExternalListenerService>();
 builder.Configuration.AddEnvironmentVariables("MeteoSettings_");
 
 var app = builder.Build();
+ILogger? logger = app.Services.GetService<ILogger<Program>>();
+
+logger?.LogInformation("Inner logging is started.");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
