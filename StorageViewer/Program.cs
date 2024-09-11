@@ -19,9 +19,6 @@ builder.Services.AddHostedService<ExternalListenerService>();
 builder.Configuration.AddEnvironmentVariables("MeteoSettings_");
 
 var app = builder.Build();
-ILogger? logger = app.Services.GetService<ILogger<Program>>();
-
-logger?.LogInformation("Inner logging is started.");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -31,6 +31,10 @@ export class AppComponent {
 
   constructor(private meteoInfoFactory: MeteoDataItemFactory) {}
 
+  ngOnInit() {
+    this.connectWebSocket();
+  }
+
   async onSearch() {
     await this.historyListElement?.searchHistory({
       fromDate: this.fromDateFilter,
