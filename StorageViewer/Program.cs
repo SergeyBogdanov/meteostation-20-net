@@ -11,7 +11,7 @@ builder.Services.AddDependencies();
 
 builder.Services.AddSpaStaticFiles(configuration =>
 {
-    configuration.RootPath = "ClientApp/dist";
+    configuration.RootPath = "client-app/browser";
 });
 
 builder.Services.AddHostedService<ExternalListenerService>();
@@ -47,7 +47,7 @@ app.UseEndpoints(routeBuilder => routeBuilder.MapDefaultControllerRoute());
 //app.MapControllers();
 
 app.UseSpa(spaBuilder => {
-    spaBuilder.Options.SourcePath = Path.Combine(builder.Environment.ContentRootPath, "ClientApp");
+    spaBuilder.Options.SourcePath = Path.Combine(builder.Environment.ContentRootPath, "client-app/browser");
     //spaBuilder.UseAngularCliServer("start");
     if (app.Environment.IsDevelopment())
     {
