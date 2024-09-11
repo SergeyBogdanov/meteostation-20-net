@@ -1,1 +1,16 @@
-<span>History page</span><span><button class="btn btn-primary" routerLink="../actual">See actual info</button></span>
+<div class="row">
+    <div class="col-10"></div>
+    <div class="col-2 text-end"><button class="btn btn-outline-secondary" [routerLink]="['../actual', actualCount]"><< Back to actual</button></div>
+</div>
+<div class="=row">
+    <div class="col-12">
+        <filter-panel title1="Search in history measures">
+            <form class="row row-cols-auto">
+              <span class="row col-4"><span class="col-2"><label for="fromDate" class="col-form-label">From:</label></span><span class="col-10"><date-control labeledId="fromDate" [(value)]="fromDateFilter"></date-control></span></span>
+              <span class="row col-4"><span class="col-2"><label for="toDate" class="col-form-label">To:</label></span><span class="col-10"><date-control labeledId="toDate" [(value)]="toDateFilter"></date-control></span></span>
+              <span class="col-4"><input type="button" (click)="onSearch()" value="Request" [disabled]="!(fromDateFilter || toDateFilter) || isSearchOperationActive" class="btn btn-primary"/></span>
+            </form>
+          </filter-panel>
+          <history-list #historyList (changeSearchStatus)="onChangeHistorySearch($event)"></history-list>
+    </div>
+</div>
