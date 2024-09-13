@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { MeteoDataItemFactory } from '../history/shared/meteo-data-item.factory';
 import { DuplexChannelService } from '../common/duplex-channel.service';
@@ -9,19 +11,23 @@ import { DateFormattingPipe } from '../controls/date-formatting.pipe';
 @Component({
   selector: 'actual-info-page',
   standalone: true,
-  imports: [DateFormattingPipe, DecimalPipe],
+  imports: [RouterLink, DateFormattingPipe, DecimalPipe],
   templateUrl: 'actual-info-page.component.html',
   styleUrl: 'actual-info-page.component.css'
 })
 export class ActualInfoPageComponent {
-    @Input() cnt: number = 0;
     currentInfo?: MeteoDataItemModel = undefined;
+    private actualSubscription?: Subscription;
 
     constructor(private meteoInfoFactory: MeteoDataItemFactory, private serverChannel: DuplexChannelService) {}
 
     ngOnInit() {
-        this.serverChannel.dataReceived.subscribe((data) => this.consumeWebSocketInfo(data));
+        this.actualSubscription = this.serverChannel.dataReceived.subscribe((data) => this.consumeWebSocketInfo(data));
         this.serverChannel.ensureConnect();
+    }
+
+    ngOnDestroy() {
+        this.actualSubscription?.unsubscribe();
     }
 
     private consumeWebSocketInfo(info: any) {

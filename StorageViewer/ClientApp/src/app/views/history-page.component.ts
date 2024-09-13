@@ -17,7 +17,6 @@ export class HistoryPageComponent {
     fromDateFilter?: Date;
     toDateFilter?: Date;
     @ViewChild('historyList') historyListElement?: HistoryListComponent;
-    actualCount: number = 25;
 
     async onSearch() {
         await this.historyListElement?.searchHistory({
