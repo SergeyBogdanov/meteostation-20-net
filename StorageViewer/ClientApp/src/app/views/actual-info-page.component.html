@@ -1,1 +1,27 @@
-<span>Actual data will be displayed here. Current count: {{ cnt }}</span>
+<div class="card">
+    <div class="card-header">
+      Actual Weather Information
+    </div>
+    <div class="=card-body">
+      <div class="row">
+        <div class="col-6">
+          <span class="mx-1">Device Id:</span><span class="mx-2">{{ currentInfo?.deviceId }}</span>
+        </div>
+        <div class="col-6 text-end">
+          <span class="mx-1">Obtained at:</span><span class="mx-2">{{ currentInfo?.recordTimestamp | dateFormatting:'full' }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <span class="mx-1">Indoor temperature:</span><span class="mx-2">{{ currentInfo?.storedData?.temperatureInternal | number:'1.0-1' }} C</span>
+        </div>
+        <div class="col-4">
+          <span class="mx-1">Indoor humidity:</span><span class="mx-2">{{ currentInfo?.storedData?.humidityInternal | number:'1.0-1' }} %</span>
+        </div>
+        <div class="col-4">
+          <span class="mx-1">Pressure:</span><span class="mx-2">{{ currentInfo?.storedData?.pressureMmHg | number:'1.0-1' }} mm Hg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
