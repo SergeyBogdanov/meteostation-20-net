@@ -23,12 +23,22 @@
                         <div class="major-data text-end">{{ currentInfo?.storedData?.pressureMmHg | number:'1.0-1' }}</div>
                         <div>Normal pressure: 760 mmHg</div>
                         <div class="position-absolute major-data_label">Kilopascal</div>
-                        <div class="major-data text-end">{{ ((currentInfo?.storedData?.pressureMmHg ?? 0) / 1000) | number:'1.0-1' }}</div>
+                        <div class="major-data text-end">{{ ((currentInfo?.storedData?.pressurePa ?? 0) / 1000) | number:'1.0-1' }}</div>
                         <div>Normal pressure: 101.3 Kilopascal</div>
                     </div>
                 </div>
             </div>
-            <div class="col-4"></div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title text-primary major-data_title border-bottom border-primary">Outdoor</div>
+                        <div class="position-absolute major-data_label">Temperature</div>
+                        <div class="major-data text-end">{{ currentInfo?.storedData?.temperatureExternal | number:'1.0-1' }}<span class="major-data_unit">C</span></div>
+                        <div class="position-absolute major-data_label">Humidity</div>
+                        <div class="major-data text-end">{{ currentInfo?.storedData?.humidityExternal | number:'1.0-1' }}<span class="major-data_unit">%</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
       <div class="row">
         <div class="col-6">

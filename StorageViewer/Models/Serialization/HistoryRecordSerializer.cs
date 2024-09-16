@@ -24,6 +24,10 @@ internal static class HistoryRecordSerializer
                 TemperatureInternal = meteoData?.TemperatureInternal ?? 0.0,
                 HumidityInternal = meteoData?.HumidityInternal ?? 0.0,
                 PressurePa = meteoData?.PressureInternal ?? 0.0,
+                TemperatureExternal = meteoData?.TemperatureExternal ?? 0.0,
+                HumidityExternal = meteoData?.HumidityExternal ?? 0.0,
+                AirQualityInternal = meteoData?.AirQualityInternal ?? -1,
+                Eco2Internal = meteoData?.Eco2Internal ?? 0,
             }
         };
 }

@@ -10,6 +10,14 @@ public class MeteoDataModel
 
     public double HumidityInternal { get; set; }
 
+    public double TemperatureExternal { get; set; }
+
+    public double HumidityExternal { get; set; }
+
+    public int AirQualityInternal { get; set; }
+
+    public int Eco2Internal { get; set; }
+
     public double PressureMmHg
     {
         get => pressureMmHg;
