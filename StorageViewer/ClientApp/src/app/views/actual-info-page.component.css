@@ -1,0 +1,17 @@
+.major-data {
+    font-size: 4.5em;
+    margin-top: 0.2em;
+}
+
+.major-data_unit {
+    font-size: x-large;
+    vertical-align: super;
+}
+
+.major-data_title {
+    font-size: xx-large;
+}
+
+.major-data_label {
+    font-size: x-large;
+}
