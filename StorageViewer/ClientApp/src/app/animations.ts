@@ -1,4 +1,4 @@
-import { animate, animateChild, group, query, style, transition, trigger } from "@angular/animations";
+import { animate, animateChild, group, keyframes, query, style, transition, trigger } from "@angular/animations";
 
 export const routeSlideAnimation =
   trigger('routeAnimations', [
@@ -40,3 +40,15 @@ export const routeSlideAnimation =
       ]),
     ]),
   ]);
+
+  export const numberChangeAnimation = trigger(
+    'changeNumberAnimation', [
+        transition(':increment, :decrement', [
+            query(':self', [animate('500ms ease-out', keyframes([
+                style({ transform: 'scale3d(1, 1, 1)' }),
+                style({ transform: 'scale3d(1, 0.8, 1)' }),
+                style({ transform: 'scale3d(1, 1, 1)' }),          
+            ]))])
+        ]),
+    ]
+  );
