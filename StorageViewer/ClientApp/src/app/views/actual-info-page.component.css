@@ -3,6 +3,11 @@
     margin-top: 0.2em;
 }
 
+.major-text-data {
+    font-size: 2.5em;
+    margin-top: 0.5em;
+}
+
 .major-data_unit {
     font-size: x-large;
     vertical-align: super;

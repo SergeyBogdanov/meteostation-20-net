@@ -16,7 +16,10 @@
                         <div class="position-absolute major-data_label">Equivalent CO2</div>
                         <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.eco2Internal">{{ currentInfo?.storedData?.eco2Internal | number:'1.0-1' }}<span class="major-data_unit">Ppm</span></div>
                         <div class="position-absolute major-data_label">Air Quality</div>
-                        <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.airQualityInternal">{{ currentInfo?.storedData?.airQualityInternal | number:'1.0-1' }}</div>
+                        <div class="major-text-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.airQualityInternal">
+                            <air-quality [qualityIndex]="currentInfo?.storedData?.airQualityInternal ?? 0" [airQuality]="currentInfo?.storedData?.airQualityInternal ?? 0"></air-quality>
+                        </div>
+                        <div class="text-end">{{ currentInfo?.storedData?.airQualityInternal | number:'1.0-1' }}</div>
                     </div>
                 </div>
             </div>

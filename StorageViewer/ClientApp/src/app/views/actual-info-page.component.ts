@@ -8,11 +8,13 @@ import { DuplexChannelService } from '../common/duplex-channel.service';
 import { MeteoDataItemModel } from '../history/shared/meteo-data-item.model';
 import { DateFormattingPipe } from '../controls/date-formatting.pipe';
 import { numberChangeAnimation } from '../animations';
+import { AirQualityDirective } from '../controls/air-quality.directive';
+import { AirQualityComponent } from '../controls/air-quality.component';
 
 @Component({
   selector: 'actual-info-page',
   standalone: true,
-  imports: [RouterLink, DateFormattingPipe, DecimalPipe],
+  imports: [RouterLink, DateFormattingPipe, DecimalPipe, AirQualityDirective, AirQualityComponent],
   templateUrl: 'actual-info-page.component.html',
   styleUrl: 'actual-info-page.component.css',
   animations: [numberChangeAnimation]
