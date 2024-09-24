@@ -2,4 +2,8 @@
     <td (click)="onTextClick()" [class.item-highlighted]="highlighted">{{ item.recordTimestamp | dateFormatting:'full' }}</td>
     <td (click)="onTextClick()" [class.item-highlighted]="highlighted" class="numeric-cell">{{ item.storedData.temperatureInternal | number:'1.0-1' }}</td>
     <td (click)="onTextClick()" [class.item-highlighted]="highlighted" class="numeric-cell">{{ item.storedData.humidityInternal | number:'1.0-1' }}</td>
+    <td (click)="onTextClick()" [class.item-highlighted]="highlighted" class="numeric-cell">{{ item.storedData.temperatureExternal | number:'1.0-1' }}</td>
+    <td (click)="onTextClick()" [class.item-highlighted]="highlighted" class="numeric-cell">{{ item.storedData.humidityExternal | number:'1.0-1' }}</td>
+    <td (click)="onTextClick()" [class.item-highlighted]="highlighted" class="numeric-cell">{{ item.storedData.eco2Internal | number:'1.0-1' }}</td>
+    <td (click)="onTextClick()" [class.item-highlighted]="highlighted" class="numeric-cell">{{ item.storedData.airQualityInternal }}</td>
     <td (click)="onTextClick()" [class.item-highlighted]="highlighted" class="numeric-cell">{{ item.storedData.pressureMmHg | number:'1.0-1' }}</td>

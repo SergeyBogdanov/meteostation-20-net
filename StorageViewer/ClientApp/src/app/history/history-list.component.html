@@ -5,6 +5,10 @@
             <th>Timestamp</th>
             <th>Internal Temperature (C)</th>
             <th>Internal Humidity (%)</th>
+            <th>External Temperature (C)</th>
+            <th>External Humidity (%)</th>
+            <th>CO2 Level (Ppm)</th>
+            <th>Air Quality Index</th>
             <th>Pressure (mm Hg)</th>
         </tr>
     </thead>
@@ -13,7 +17,7 @@
             <tr history-item #meteoRowElement [item]="meteoRow" (chosen)="onChosen(meteoRow)"></tr>
         } @empty {
         <tr>
-            <td colspan="5" class="emptyCell">Please select a history period and hit the "Request" button to get data.</td>
+            <td colspan="9" class="emptyCell">Please select a history period and hit the "Request" button to get data.</td>
         </tr>
         }
     </tbody>
