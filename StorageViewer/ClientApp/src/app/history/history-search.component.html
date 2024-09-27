@@ -1,2 +1,14 @@
+<div class="row">
+    <div class="col-12 text-end">
+        <span class="mx-1 switch-label" (click)="setTableView(true)">Table</span>
+        <div class="form-switch form-check-inline">
+            <input id="historyDataViewType" class="form-check-input" type="checkbox" role="switch" [ngModel]="!isTableShown" />
+        </div>
+        <span class="switch-label" (click)="setTableView(false)">Chart</span>
+    </div>
+</div>
+@if (isTableShown) {
 <history-list [historyRows]="historyRows" [actionInProgress]="actionInProgress"></history-list>
+} @else {
 <history-chart></history-chart>
+}
