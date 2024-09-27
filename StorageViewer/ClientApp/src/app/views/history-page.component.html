@@ -11,6 +11,7 @@
               <span class="col-4"><input type="button" (click)="onSearch()" value="Request" [disabled]="!(fromDateFilter || toDateFilter) || isSearchOperationActive" class="btn btn-primary"/></span>
             </form>
           </filter-panel>
-          <history-list #historyList (changeSearchStatus)="onChangeHistorySearch($event)"></history-list>
+          <!--history-list #historyList (changeSearchStatus)="onChangeHistorySearch($event)"></history-list-->
+          <history-search #historySearch (changeSearchStatus)="onChangeHistorySearch($event)"></history-search>
     </div>
 </div>

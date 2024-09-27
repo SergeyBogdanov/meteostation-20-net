@@ -1,13 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { HistoryListComponent } from '../history/history-list.component';
 import { DateControlComponent } from '../controls/date-control.component';
 import { FilterPanelComponent } from '../controls/filter-panel.component';
+import { HistorySearchComponent } from '../history/history-search.component';
 
 @Component({
   selector: 'history-page',
   standalone: true,
-  imports: [RouterLink, HistoryListComponent,
+  imports: [RouterLink, HistorySearchComponent,
     DateControlComponent, FilterPanelComponent],
   templateUrl: 'history-page.component.html',
   styleUrl: 'history-page.component.css'
@@ -16,10 +16,10 @@ export class HistoryPageComponent {
     isSearchOperationActive: boolean = false;
     fromDateFilter?: Date;
     toDateFilter?: Date;
-    @ViewChild('historyList') historyListElement?: HistoryListComponent;
+    @ViewChild('historySearch') historySearchElement?: HistorySearchComponent;
 
     async onSearch() {
-        await this.historyListElement?.searchHistory({
+        await this.historySearchElement?.searchHistory({
           fromDate: this.fromDateFilter,
           toDate: this.toDateFilter
         });
