@@ -3,11 +3,12 @@ import { HistoryService } from "./shared/history.service";
 import { HistoryFilterOptionsModel } from "./shared/history-filter-options.model";
 import { MeteoDataItemModel } from "./shared/meteo-data-item.model";
 import { HistoryListComponent } from "./history-list.component";
+import { HistoryChartComponent } from "./history-chart.component";
 
 @Component({
     selector: 'history-search',
     standalone: true,
-    imports: [HistoryListComponent],
+    imports: [HistoryListComponent, HistoryChartComponent],
     templateUrl: 'history-search.component.html',
     styleUrl: 'history-search.component.css'
 })
