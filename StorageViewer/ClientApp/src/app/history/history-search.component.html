@@ -10,5 +10,5 @@
 @if (isTableShown) {
 <history-list [historyRows]="historyRows" [actionInProgress]="actionInProgress"></history-list>
 } @else {
-<history-chart></history-chart>
+<history-chart [historyRows]="historyRows"></history-chart>
 }
