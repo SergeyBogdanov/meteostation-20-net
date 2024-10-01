@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { BaseChartDirective } from "ng2-charts";
+import "chartjs-adapter-moment";
 
 import { MeteoDataItemModel } from "./shared/meteo-data-item.model";
 
@@ -19,9 +20,40 @@ export class HistoryChartComponent {
         this.originalHistoryRows = val;
         this.chartData = {
             datasets: [{
-                data: (val ?? []).map(item => ({x: item.recordTimestamp, y: item.storedData?.pressureMmHg}))
+                label: 'Pressure (mmHg)',
+                yAxisID: 'pressureHgAxis',
+                data: this.composeDataArray(val, item => item.storedData?.pressureMmHg)
+            },
+            {
+                label: 'Indoor Humidity (%)',
+                yAxisID: 'humidityAxis',
+                data: this.composeDataArray(val, item => item.storedData?.humidityInternal)
+            },
+            {
+                label: 'Outdoor Humidity (%)',
+                yAxisID: 'humidityAxis',
+                data: this.composeDataArray(val, item => item.storedData?.humidityExternal)
+            },
+            {
+                label: 'Indoor Temperature (C)',
+                yAxisID: 'tempAxis',
+                data: this.composeDataArray(val, item => item.storedData?.temperatureInternal)
+            },
+            {
+                label: 'Outdoor Temperature (C)',
+                yAxisID: 'tempAxis',
+                data: this.composeDataArray(val, item => item.storedData?.temperatureExternal)
+            },
+            {
+                label: 'eCO2 (ppm)',
+                yAxisID: 'eCo2Axis',
+                data: this.composeDataArray(val, item => (item.storedData?.eco2Internal > 0 ? item.storedData?.eco2Internal : null))
             }]
         }
+    }
+
+    private composeDataArray(sourceData: MeteoDataItemModel[], extractProc: (item: MeteoDataItemModel) => any) {
+        return (sourceData ?? []).map(item => ({x: item.recordTimestamp, y: extractProc(item)}));
     }
 
     chartData: any = {
@@ -31,10 +63,28 @@ export class HistoryChartComponent {
     };
 
     chartOptions: any = {
-        // scales: {
-        //     yAxis: {
-        //         type: "time"
-        //     }
-        // }
+        scales: {
+            yAxes: {
+                'tempAxis' : {
+                    type: 'linear',
+                    position: 'left'
+                },
+                'humidityAxis' : {
+                    type: 'linear',
+                    position: 'right'
+                },
+                'eCo2Axis' : {
+                    type: 'linear',
+                    position: 'right'
+                },
+                'pressureHgAxis' : {
+                    type: 'linear',
+                    position: 'right'
+                }
+            },
+            xAxis: {
+                type: "time"
+            }
+        }
     };
 }
