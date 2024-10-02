@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ViewChild } from "@angular/core";
 import { BaseChartDirective } from "ng2-charts";
 import "chartjs-adapter-moment";
 
@@ -13,6 +13,8 @@ import { MeteoDataItemModel } from "./shared/meteo-data-item.model";
 })
 export class HistoryChartComponent {
     private originalHistoryRows: MeteoDataItemModel[] = [];
+
+    @ViewChild('mainChart', { read: BaseChartDirective }) mainChart?: BaseChartDirective;
     @Input() get historyRows(): MeteoDataItemModel[] {
         return this.originalHistoryRows;
     }
@@ -52,6 +54,29 @@ export class HistoryChartComponent {
         }
     }
 
+    showIndoor() {
+        this.manageCharts([1, 3], [2, 4]);
+    }
+
+    showOutdoor() {
+        this.manageCharts([2, 4], [1, 3]);
+    }
+
+    showAll() {
+        this.manageCharts([0, 1, 2, 3, 4, 5], []);
+    }
+
+    private doForEachIndex(indexes: number[], action: (index: number) => void) {
+        for (let index of indexes) {
+            action(index);
+        }
+    }
+
+    private manageCharts(toShow: number[], toHide: number[]) {
+        this.doForEachIndex(toShow, (element) => this.mainChart?.hideDataset(element, false));
+        this.doForEachIndex(toHide, (element) => this.mainChart?.hideDataset(element, true));
+    }
+
     private composeDataArray(sourceData: MeteoDataItemModel[], extractProc: (item: MeteoDataItemModel) => any) {
         return (sourceData ?? []).map(item => ({x: item.recordTimestamp, y: extractProc(item)}));
     }
@@ -67,7 +92,11 @@ export class HistoryChartComponent {
             yAxes: {
                 'tempAxis' : {
                     type: 'linear',
-                    position: 'left'
+                    position: 'left',
+                    title: {
+                        text: 'C',
+                        display: true
+                    }
                 },
                 'humidityAxis' : {
                     type: 'linear',
@@ -75,15 +104,28 @@ export class HistoryChartComponent {
                 },
                 'eCo2Axis' : {
                     type: 'linear',
-                    position: 'right'
+                    position: 'center',
+                    title: {
+                        text: 'ppm',
+                        display: true
+                    }
                 },
                 'pressureHgAxis' : {
                     type: 'linear',
-                    position: 'right'
+                    position: 'right',
+                    title: {
+                        text: 'mm Hg',
+                        display: true
+                    }
                 }
             },
             xAxis: {
                 type: "time"
+            }
+        },
+        elements: {
+            point : {
+                pointStyle: 'cross'
             }
         }
     };

@@ -1,1 +1,9 @@
-<canvas baseChart type="line" [data]="chartData" [options]="chartOptions"></canvas>
+<canvas #mainChart baseChart type="line" [data]="chartData" [options]="chartOptions"></canvas>
+<div class="row">
+    <div class="col-12">
+        <span class="mx-1">Show charts:</span>
+        <button class="btn btn-outline-secondary mx-2" (click)="showIndoor()">Indoor</button>
+        <button class="btn btn-outline-secondary mx-2" (click)="showOutdoor()">Outdoor</button>
+        <button class="btn btn-outline-secondary mx-2" (click)="showAll()">All</button>
+    </div>
+</div>
