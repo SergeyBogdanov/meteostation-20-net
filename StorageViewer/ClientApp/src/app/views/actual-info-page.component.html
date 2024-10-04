@@ -50,6 +50,7 @@
                                 <div class="position-absolute major-data_label">Kilopascal</div>
                                 <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.pressurePa">{{ ((currentInfo?.storedData?.pressurePa ?? 0) / 1000) | number:'1.0-1' }}</div>
                                 <div>Normal pressure: 101.3 Kilopascal</div>
+                                <date-axis-chart type="line" [data]="latestPressureData" [labels]="pressureDataLabels"></date-axis-chart>
                             </div>
                         </div>
                     </div>
