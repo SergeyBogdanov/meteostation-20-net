@@ -13,7 +13,7 @@ export class DateAxisChartComponent {
     @Input() data: number[] = [];
     @Input() labels: Date[] | string[] = [];
     @Input() type: 'line' | 'bar' = 'line';
-    @Output() click = new EventEmitter();
+    @Output() userClick = new EventEmitter<void>();
     chartData: any = {
         datasets: [{
             label: false,
@@ -63,5 +63,9 @@ export class DateAxisChartComponent {
         };
         this.chartOptions.scales['yAxis'] = (minAxisValue !== undefined && Number.isFinite(minAxisValue)) ?
                                                 { min: minAxisValue } : {};
+    }
+
+    onChartClick() {
+        this.userClick.emit();
     }
 }
