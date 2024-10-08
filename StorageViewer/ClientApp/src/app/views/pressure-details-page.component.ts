@@ -5,6 +5,7 @@ import { DateAxisChartComponent, DateAxisChartType } from "../controls/date-axis
 import moment from "moment";
 import { HistoryService } from "../history/shared/history.service";
 import { FormsModule } from "@angular/forms";
+import { HoursAggregator } from "../common/utils/hours-aggregator";
 
 class RawPressureData {
     constructor(public timestamp: moment.Moment, public pressureMmHg: number, public presurrePa: number) {}
@@ -20,7 +21,15 @@ class RawPressureData {
 export class PressureDetailsPageComponent {
     working : boolean = false;
     periodDuration: number = 1;
-    aggregateHours: number = 0;
+    _aggregateHours: number = 0;
+    get aggregateHours() : number {
+        return this._aggregateHours;
+    }
+    set aggregateHours(newValue: number) {
+        this._aggregateHours = newValue;
+        this.aggregateData();
+    }
+
     get chartType(): DateAxisChartType {
         return this.aggregateHours > 0 ? 'bar' : 'line';
     }
@@ -50,6 +59,12 @@ export class PressureDetailsPageComponent {
         if (this.aggregateHours === 0) {
             this.pressureData = this.pressureHistory.map(item => item.pressureMmHg);
             this.pressureLabels = this.pressureHistory.map(item => item.timestamp.toISOString());
+        } else {
+            const aggregator = new HoursAggregator(this.aggregateHours);
+            this.pressureHistory.forEach(item => aggregator.addData(item.timestamp, item.pressureMmHg));
+            const aggregatedData = aggregator.aggregate();
+            this.pressureData = aggregatedData.map(item => item.calculatedResult);
+            this.pressureLabels = aggregatedData.map(item => item.timestamp.toISOString());
         }
     }
 }
