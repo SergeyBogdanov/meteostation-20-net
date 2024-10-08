@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from "@angular/
 import { BaseChartDirective } from "ng2-charts";
 import "chartjs-adapter-moment";
 
+export type DateAxisChartType = 'line' | 'bar';
+
 @Component({
     selector: 'date-axis-chart',
     standalone: true,
@@ -12,7 +14,7 @@ import "chartjs-adapter-moment";
 export class DateAxisChartComponent {
     @Input() data: number[] = [];
     @Input() labels: Date[] | string[] = [];
-    @Input() type: 'line' | 'bar' = 'line';
+    @Input() type: DateAxisChartType = 'line';
     @Output() userClick = new EventEmitter<void>();
     chartData: any = {
         datasets: [{

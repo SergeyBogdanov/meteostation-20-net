@@ -42,10 +42,6 @@ export class ActualInfoPageComponent {
         this.actualSubscription?.unsubscribe();
     }
 
-    onPressureChartClicked() {
-        console.log('Chart is clicked');
-    }
-
     private consumeWebSocketInfo(info: any) {
         this.currentInfo = this.meteoInfoFactory.restoreFromServerObject(info);
     }
