@@ -24,8 +24,9 @@ import { HistoryService } from '../history/shared/history.service';
 })
 export class ActualInfoPageComponent {
     currentInfo?: MeteoDataItemModel = undefined;
+    latestOutdoorTemperatureData: number[] = [];
     latestPressureData: number[] = [];
-    pressureDataLabels: string[] = [];
+    dataTimestampLabels: string[] = [];
 
     private actualSubscription?: Subscription;
 
@@ -35,7 +36,7 @@ export class ActualInfoPageComponent {
         this.actualSubscription = this.serverChannel.dataReceived.subscribe((data) => this.consumeWebSocketInfo(data));
         this.serverChannel.ensureConnect();
         const historycalData = await this.requestLatestData();
-        this.aggregatePressureData(historycalData);
+        this.aggregateHistoryData(historycalData);
     }
 
     ngOnDestroy() {
@@ -50,8 +51,9 @@ export class ActualInfoPageComponent {
         return await this.historyService.getHistory(moment().subtract(12, 'hours').toDate(), moment().toDate());
     }
 
-    private aggregatePressureData(dataBlock: MeteoDataItemModel[]) {
+    private aggregateHistoryData(dataBlock: MeteoDataItemModel[]) {
+        this.latestOutdoorTemperatureData = dataBlock.map(item => item.storedData?.temperatureExternal ?? 0);
         this.latestPressureData = dataBlock.map(item => item.storedData?.pressureMmHg ?? 0);
-        this.pressureDataLabels = dataBlock.map(item => item.recordTimestamp);
+        this.dataTimestampLabels = dataBlock.map(item => item.recordTimestamp);
     }
 };
