@@ -33,7 +33,7 @@
                                 <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.temperatureExternal">{{ currentInfo?.storedData?.temperatureExternal | number:'1.0-1' }}<span class="major-data_unit">C</span></div>
                                 <div class="position-absolute major-data_label">Humidity</div>
                                 <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.humidityExternal">{{ currentInfo?.storedData?.humidityExternal | number:'1.0-1' }}<span class="major-data_unit">%</span></div>
-                                <date-axis-chart type="line" [data]="latestOutdoorTemperatureData" [labels]="dataTimestampLabels"></date-axis-chart>
+                                <date-axis-chart type="line" [data]="latestOutdoorTemperatureData" [labels]="dataTimestampLabels" routerLink="../temperature-details"></date-axis-chart>
                             </div>
                         </div>
                     </div>

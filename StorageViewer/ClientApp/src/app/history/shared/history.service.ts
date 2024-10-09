@@ -24,4 +24,8 @@ export class HistoryService {
         }
         return result;
     }
+
+    async getHistoryForDays(deepDays: number): Promise<MeteoDataItemModel[]> {
+        return await this.getHistory(new Date(Date.now() - (deepDays * 24 * 60 * 60 * 1000)), new Date());
+    }
 }

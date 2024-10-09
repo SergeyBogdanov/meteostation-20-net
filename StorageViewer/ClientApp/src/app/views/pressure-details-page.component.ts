@@ -42,7 +42,7 @@ export class PressureDetailsPageComponent {
     async onSearch() {
         try {
             this.working = true;
-            const history = await this.historyService.getHistory(moment().subtract(this.periodDuration, 'days').toDate(), moment().toDate());
+            const history = await this.historyService.getHistoryForDays(this.periodDuration);
             this.pressureHistory = history.map(item => new RawPressureData(
                                                             moment(item.recordTimestamp), 
                                                             item.storedData?.pressureMmHg ?? 0, 
