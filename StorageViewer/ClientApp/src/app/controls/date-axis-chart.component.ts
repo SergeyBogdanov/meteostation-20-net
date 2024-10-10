@@ -69,7 +69,6 @@ export class DateAxisChartComponent {
         const axisMinValues: number[] = extractedData.map(raw => raw.buttonLevel).filter(num => num !== undefined);
         this.chartOptions.scales['yAxis'] = (axisMinValues.length > 0) ?
                                                 { min: Math.min(...axisMinValues) } : {};
-        console.log(`Enabling legend: ${(this.chartData.datasets as any[]).find(item => !!item.label)}`)
         this.chartOptions.plugins.legend.display = (this.chartData.datasets as any[]).find(item => !!item.label) !== undefined;
     }
 
