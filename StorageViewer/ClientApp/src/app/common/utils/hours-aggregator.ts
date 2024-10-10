@@ -17,11 +17,32 @@ class DataGroup {
     }
 }
 
+type AggregateProc = (source: number[]) => number;
+
+function aggregateAvg(source: number[]): number {
+    let sum: number = 0;
+    for(let item of source) {
+        sum += item;
+    }
+    return sum / source.length;
+}
+
+function aggregateMax(source: number[]): number {
+    return Math.max(...source);
+}
+
+function aggregateMin(source: number[]): number {
+    return Math.min(...source);
+}
+
+export type AggregationType = 'avg' | 'min' | 'max';
+
 export class AggregatedResult {
     constructor(public timestamp: moment.Moment, public calculatedResult: number) {}
 }
 
 export class HoursAggregator {
+    type: AggregationType = 'avg';
     private sourceData: DataGroup[] = [];
 
     constructor(private periodLengthHr: number) {}
@@ -32,19 +53,12 @@ export class HoursAggregator {
     }
 
     aggregate(): AggregatedResult[] {
-        return this.sourceData.map(source => new AggregatedResult(source.startPoint, this.applyAggregation(source.dataPoints)));
+        return this.sourceData.map(source => new AggregatedResult(source.startPoint, 
+                                                    this.applyAggregation(source.dataPoints, this.getAggregateProc())));
     }
 
-    private applyAggregation(source: number[]): number {
-        let result: number = 0;
-        if (source.length > 0) {
-            let sum: number = 0;
-            for(let item of source) {
-                sum += item;
-            }
-            result = sum / source.length;
-        }
-        return result;
+    private applyAggregation(source: number[], aggregateProc: AggregateProc): number {
+        return (source.length > 0) ? aggregateProc(source): 0;
     }
 
     private ensureGroupFor(timestamp: moment.Moment) : DataGroup {
@@ -59,5 +73,11 @@ export class HoursAggregator {
     private convertToStartPoint(timestamp: moment.Moment): moment.Moment {
         const currHrs = Math.floor(timestamp.unix() / (60 * 60));
         return moment.unix((currHrs - (currHrs % this.periodLengthHr)) * (60 * 60));
+    }
+
+    private getAggregateProc(): AggregateProc {
+        return this.type === 'max' ? aggregateMax :
+                this.type === 'min' ? aggregateMin :
+                    aggregateAvg;
     }
 }
