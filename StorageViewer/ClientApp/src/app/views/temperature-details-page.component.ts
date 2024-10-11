@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input, SimpleChanges } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterLink } from "@angular/router";
 import { DateAxisChartComponent, DateAxisChartOptions } from "../controls/date-axis-chart.component";
@@ -6,9 +6,20 @@ import { FilterPanelComponent } from "../controls/filter-panel.component";
 import { HistoryService } from "../history/shared/history.service";
 import moment from "moment";
 import { AggregatedResult, AggregationType, HoursAggregator } from "../common/utils/hours-aggregator";
+import { MeteoDataItemModel } from "../history/shared/meteo-data-item.model";
 
 class RawTemperatureData {
     constructor(public timestamp: moment.Moment, public temperature: number) {}
+}
+
+type ExtractDataProc = (rawData: MeteoDataItemModel) => number | undefined;
+
+function extractIndoorData(rawData: MeteoDataItemModel) : number | undefined {
+    return rawData.storedData?.temperatureInternal;
+}
+
+function extractOutdoorData(rawData: MeteoDataItemModel) : number | undefined {
+    return rawData.storedData?.temperatureExternal;
 }
 
 @Component({
@@ -19,6 +30,7 @@ class RawTemperatureData {
     styleUrl: 'temperature-details-page.component.css'
 })
 export class TemperatureDetailsPageComponent {
+    @Input() type: 'inner' | 'outer' = 'outer';
     working : boolean = false;
     periodDuration: number = 1;
     chartData: number[] | number[][] = [];
@@ -33,8 +45,13 @@ export class TemperatureDetailsPageComponent {
         this.aggregateData();
     }
     private rawData: RawTemperatureData[] = [];
+    private extractDataProc: ExtractDataProc = extractOutdoorData;
 
     constructor(private historyService: HistoryService) {}
+
+    ngOnChanges(changes: SimpleChanges) {
+        this.extractDataProc = this.type === 'inner' ? extractIndoorData : extractOutdoorData;
+    }
 
     async onDataRequest() {
         try {
@@ -42,7 +59,7 @@ export class TemperatureDetailsPageComponent {
             const history = await this.historyService.getHistoryForDays(this.periodDuration);
             this.rawData = history.map(item => new RawTemperatureData(
                                                             moment(item.recordTimestamp), 
-                                                            item.storedData?.temperatureExternal ?? 0));
+                                                            this.extractDataProc(item) ?? 0));
             this.aggregateData();
         } finally {
             this.working = false;

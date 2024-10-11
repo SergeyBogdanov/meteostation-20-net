@@ -22,6 +22,5 @@ export class DateControlComponent {
                 this.valueChange.emit(this.value);
             }
         }
-        console.log('Model has changed');
     }
 };

@@ -12,6 +12,7 @@
                         <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.temperatureInternal">{{ currentInfo?.storedData?.temperatureInternal | number:'1.0-1' }}<span class="major-data_unit">C</span></div>
                         <div class="position-absolute major-data_label">Humidity</div>
                         <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.humidityInternal">{{ currentInfo?.storedData?.humidityInternal | number:'1.0-1' }}<span class="major-data_unit">%</span></div>
+                        <date-axis-chart type="line" [data]="latestIndoorTemperatureData" [labels]="dataTimestampLabels" routerLink="../temperature-details/inner"></date-axis-chart>
                         <div class="border-bottom border-secondary"></div>
                         <div class="position-absolute major-data_label">Equivalent CO2</div>
                         <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.eco2Internal">{{ currentInfo?.storedData?.eco2Internal | number:'1.0-1' }}<span class="major-data_unit">Ppm</span></div>
@@ -33,7 +34,7 @@
                                 <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.temperatureExternal">{{ currentInfo?.storedData?.temperatureExternal | number:'1.0-1' }}<span class="major-data_unit">C</span></div>
                                 <div class="position-absolute major-data_label">Humidity</div>
                                 <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.humidityExternal">{{ currentInfo?.storedData?.humidityExternal | number:'1.0-1' }}<span class="major-data_unit">%</span></div>
-                                <date-axis-chart type="line" [data]="latestOutdoorTemperatureData" [labels]="dataTimestampLabels" routerLink="../temperature-details"></date-axis-chart>
+                                <date-axis-chart type="line" [data]="latestOutdoorTemperatureData" [labels]="dataTimestampLabels" routerLink="../temperature-details/outer"></date-axis-chart>
                             </div>
                         </div>
                     </div>

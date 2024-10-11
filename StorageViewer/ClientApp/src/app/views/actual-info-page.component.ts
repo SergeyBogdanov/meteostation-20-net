@@ -25,6 +25,7 @@ import { HistoryService } from '../history/shared/history.service';
 export class ActualInfoPageComponent {
     currentInfo?: MeteoDataItemModel = undefined;
     latestOutdoorTemperatureData: number[] = [];
+    latestIndoorTemperatureData: number[] = [];
     latestPressureData: number[] = [];
     dataTimestampLabels: string[] = [];
 
@@ -53,6 +54,7 @@ export class ActualInfoPageComponent {
 
     private aggregateHistoryData(dataBlock: MeteoDataItemModel[]) {
         this.latestOutdoorTemperatureData = dataBlock.map(item => item.storedData?.temperatureExternal ?? 0);
+        this.latestIndoorTemperatureData = dataBlock.map(item => item.storedData?.temperatureInternal ?? 0);
         this.latestPressureData = dataBlock.map(item => item.storedData?.pressureMmHg ?? 0);
         this.dataTimestampLabels = dataBlock.map(item => item.recordTimestamp);
     }
