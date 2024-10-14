@@ -2,20 +2,28 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from "@angular/
 import { BaseChartDirective } from "ng2-charts";
 import "chartjs-adapter-moment";
 import moment from "moment";
+import _ from 'lodash';
 import { isNullOrUndef } from "chart.js/helpers";
 
 class DataPoint {
     constructor(public x: string, public y: number) {}
 }
 
+const DEFAULT_AXIS_ID: string = 'yAxis';
+
 class RawDataset {
-    constructor(public dataPoints: DataPoint[], public buttonLevel: number | undefined) {}
+    constructor(public dataPoints: DataPoint[], public buttonLevel: number | undefined, public axisId: string) {}
 }
 
 export type DateAxisChartType = 'line' | 'bar';
 
+export interface AxisOptions {
+    dataLalel?: string;
+    groupId?: string;
+}
+
 export interface DateAxisChartOptions {
-    dataLabels?: string[];
+    axisOptions?: AxisOptions[];
 }
 
 @Component({
@@ -63,13 +71,19 @@ export class DateAxisChartComponent {
             datasets: extractedData.map((raw, index) => ({
                 label: this.getLabel(index),
                 data: raw.dataPoints,
-                yAxisID: 'yAxis'
+                yAxisID: raw.axisId
             }))
         };
-        const axisMinValues: number[] = extractedData.map(raw => raw.buttonLevel).filter(num => num !== undefined);
-        this.chartOptions.scales['yAxis'] = (axisMinValues.length > 0) ?
-                                                { min: Math.min(...axisMinValues) } : {};
+        const groupedByAxisId = _.groupBy(extractedData, data => data.axisId);
+        const axisMinLevels = _.transform(groupedByAxisId, (result: any, rawSet, axisId) => result[axisId] = this.extractMinLevel(rawSet), {});
+        for(let axisId in axisMinLevels) {
+            this.chartOptions.scales['yAxis'] = (!_.isUndefined(axisMinLevels[axisId])) ? { min: axisMinLevels[axisId] } : {};
+        }
         this.chartOptions.plugins.legend.display = (this.chartData.datasets as any[]).find(item => !!item.label) !== undefined;
+    }
+
+    private extractMinLevel(rawSet: RawDataset[]): number | undefined {
+        return _.chain(rawSet).map(set => set.buttonLevel).min().value();
     }
 
     onChartClick() {
@@ -80,10 +94,10 @@ export class DateAxisChartComponent {
         let normalizedData: number[][] = this.getNormalizedData();
         let result: RawDataset[] = [];
         if (this.everyDataHasLabels(normalizedData)) {
-            result = normalizedData.map(rawData => this.convertToDataset(rawData));
+            result = normalizedData.map((rawData, index) => this.convertToDataset(rawData, index));
         }
         if (result.length === 0) {
-            result.push(new RawDataset([], undefined));
+            result.push(new RawDataset([], undefined, DEFAULT_AXIS_ID));
         }
         return result;
     }
@@ -105,9 +119,10 @@ export class DateAxisChartComponent {
         return result;
     }
 
-    private convertToDataset(rawData: number[]): RawDataset {
+    private convertToDataset(rawData: number[], datasetIndex: number): RawDataset {
         return new RawDataset(rawData.map((item, index) => new DataPoint(this.representAsString(this.labels[index]), item)),
-                        this.determinateButtomLevel(rawData));
+                        this.determinateButtomLevel(rawData),
+                        this.determinateAxisId(datasetIndex));
     }
 
     private representAsString(label: string | Date): string {
@@ -128,8 +143,13 @@ export class DateAxisChartComponent {
     }
 
     private getLabel(index: number): string | boolean {
-        return (!isNullOrUndef(this.options?.dataLabels?.[index])) ?
-                    this.options.dataLabels[index] : false;
+        return (!isNullOrUndef(this.options?.axisOptions?.[index]?.dataLalel)) ?
+                    this.options.axisOptions[index].dataLalel : false;
     }
 
+    private determinateAxisId(index: number): string {
+        return isNullOrUndef(this.options?.axisOptions?.[index]?.groupId) ?
+                DEFAULT_AXIS_ID :
+                this.options.axisOptions[index].groupId;
+    }
 }

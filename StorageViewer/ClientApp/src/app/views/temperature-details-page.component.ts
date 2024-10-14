@@ -1,7 +1,7 @@
 import { Component, Input, SimpleChanges } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterLink } from "@angular/router";
-import { DateAxisChartComponent, DateAxisChartOptions } from "../controls/date-axis-chart.component";
+import { DateAxisChartComponent, DateAxisChartOptions, AxisOptions } from "../controls/date-axis-chart.component";
 import { FilterPanelComponent } from "../controls/filter-panel.component";
 import { HistoryService } from "../history/shared/history.service";
 import moment from "moment";
@@ -48,6 +48,10 @@ const tempreratureSelector: DataSelector = (rawItem: RawMeasureData) => rawItem.
 const humiditySelector: DataSelector = (rawItem: RawMeasureData) => rawItem.humidity;
 
 type DisplayModeType = 'temp' | 'humidity' | 'both';
+
+class AxisOptionsImpl implements AxisOptions {
+    constructor(public dataLalel?: string, public groupId?: string) {}
+}
 
 @Component({
     selector: 'temperature-details-page',
@@ -104,6 +108,24 @@ export class TemperatureDetailsPageComponent {
     }
 
     private aggregateData(): void {
+        if (this.displayMode === 'both') {
+            this.displayManyAxisData();
+        } else {
+            this.displaySingleAxisData();
+        }
+    }
+
+    private displayManyAxisData(): void {
+        this.chartData =  [
+            this.rawData.map(item => tempreratureSelector(item)),
+            this.rawData.map(item => humiditySelector(item))];
+        this.commonLabels = this.rawData.map(item => item.timestamp.toISOString());
+        this.chartOptions = {axisOptions: [
+            new AxisOptionsImpl('Temperature', 'temp'), 
+            new AxisOptionsImpl('Humidity', 'humidity')]};
+    }
+
+    private displaySingleAxisData(): void {
         this.dataSelectorProc = this.displayMode == 'temp' ? tempreratureSelector : humiditySelector;
         if (this.aggregateHours === 0) {
             this.chartData = this.rawData.map(item => this.dataSelectorProc(item));
@@ -116,7 +138,10 @@ export class TemperatureDetailsPageComponent {
                                 aggregatedAvg.map(item => item.calculatedResult)
                             ];
             this.commonLabels = aggregatedAvg.map(item => item.timestamp.toISOString());
-            this.chartOptions = { dataLabels: ['Min', 'Max', 'Avg']}
+            this.chartOptions = { axisOptions: [
+                            new AxisOptionsImpl('Min'), 
+                            new AxisOptionsImpl('Max'), 
+                            new AxisOptionsImpl('Avg')]};
         }
     }
 
