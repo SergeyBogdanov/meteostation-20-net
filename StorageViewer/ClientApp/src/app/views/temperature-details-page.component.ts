@@ -8,19 +8,44 @@ import moment from "moment";
 import { AggregatedResult, AggregationType, HoursAggregator } from "../common/utils/hours-aggregator";
 import { MeteoDataItemModel } from "../history/shared/meteo-data-item.model";
 
-class RawTemperatureData {
-    constructor(public timestamp: moment.Moment, public temperature: number) {}
+class RawMeasureData {
+    constructor(public timestamp: moment.Moment, public temperature: number, public humidity: number) {}
 }
 
-type ExtractDataProc = (rawData: MeteoDataItemModel) => number | undefined;
-
-function extractIndoorData(rawData: MeteoDataItemModel) : number | undefined {
-    return rawData.storedData?.temperatureInternal;
+interface DataExtractor {
+    extractTemperature(rawData: MeteoDataItemModel) : number | undefined;
+    extractHumidity(rawData: MeteoDataItemModel) : number | undefined;
 }
 
-function extractOutdoorData(rawData: MeteoDataItemModel) : number | undefined {
-    return rawData.storedData?.temperatureExternal;
+class IndoorDataExtractor implements DataExtractor {
+    extractTemperature(rawData: MeteoDataItemModel) : number | undefined {
+        return rawData.storedData?.temperatureInternal;
+    }
+
+    extractHumidity(rawData: MeteoDataItemModel) : number | undefined {
+        return rawData.storedData?.humidityInternal;
+    }
 }
+
+const indoorDataExtractor = new IndoorDataExtractor();
+
+class OutdoorDataExtractor implements DataExtractor {
+    extractTemperature(rawData: MeteoDataItemModel) : number | undefined {
+        return rawData.storedData?.temperatureExternal;
+    }
+
+    extractHumidity(rawData: MeteoDataItemModel) : number | undefined {
+        return rawData.storedData?.humidityExternal;
+    }
+}
+
+const outdoorDataExtractor = new OutdoorDataExtractor();
+
+type DataSelector = (rawItem: RawMeasureData) => number;
+
+const tempreratureSelector: DataSelector = (rawItem: RawMeasureData) => rawItem.temperature;
+
+const humiditySelector: DataSelector = (rawItem: RawMeasureData) => rawItem.humidity;
 
 @Component({
     selector: 'temperature-details-page',
@@ -44,22 +69,24 @@ export class TemperatureDetailsPageComponent {
         this._aggregateHours = newValue;
         this.aggregateData();
     }
-    private rawData: RawTemperatureData[] = [];
-    private extractDataProc: ExtractDataProc = extractOutdoorData;
+    private rawData: RawMeasureData[] = [];
+    private dataExtractor: DataExtractor = outdoorDataExtractor;
+    private dataSelectorProc: DataSelector = tempreratureSelector;
 
     constructor(private historyService: HistoryService) {}
 
     ngOnChanges(changes: SimpleChanges) {
-        this.extractDataProc = this.type === 'inner' ? extractIndoorData : extractOutdoorData;
+        this.dataExtractor = this.type === 'inner' ? indoorDataExtractor : outdoorDataExtractor;
     }
 
     async onDataRequest() {
         try {
             this.working = true;
             const history = await this.historyService.getHistoryForDays(this.periodDuration);
-            this.rawData = history.map(item => new RawTemperatureData(
+            this.rawData = history.map(item => new RawMeasureData(
                                                             moment(item.recordTimestamp), 
-                                                            this.extractDataProc(item) ?? 0));
+                                                            this.dataExtractor.extractTemperature(item) ?? 0,
+                                                            this.dataExtractor.extractHumidity(item) ?? 0));
             this.aggregateData();
         } finally {
             this.working = false;
@@ -68,7 +95,7 @@ export class TemperatureDetailsPageComponent {
 
     private aggregateData(): void {
         if (this.aggregateHours === 0) {
-            this.chartData = this.rawData.map(item => item.temperature);
+            this.chartData = this.rawData.map(item => this.dataSelectorProc(item));
             this.commonLabels = this.rawData.map(item => item.timestamp.toISOString());
             this.chartOptions = {};
         } else {
@@ -85,7 +112,7 @@ export class TemperatureDetailsPageComponent {
     private aggregateByProc(aggregationType: AggregationType): AggregatedResult[] {
         const aggregator = new HoursAggregator(this.aggregateHours);
         aggregator.type = aggregationType;
-        this.rawData.forEach(item => aggregator.addData(item.timestamp, item.temperature));
+        this.rawData.forEach(item => aggregator.addData(item.timestamp, this.dataSelectorProc(item)));
         return aggregator.aggregate();
     }
 }
