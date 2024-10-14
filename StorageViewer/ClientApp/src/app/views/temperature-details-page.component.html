@@ -21,16 +21,29 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <filter-panel title="Aggregate data">
+        <filter-panel title="Aggregate & display data">
             <form class="row row-cols auto">
-                <span class="row col-8"><span class="col-2"><label for="aggregatePeriod" class="col-form-label">Aggregate:</label></span><span class="col-10">
-                    <select id="aggregatePeriod" class="form-select" [(ngModel)]="aggregateHours" name="aggregatePeriod">
-                        <option [ngValue]="0">None</option>
-                        <option [ngValue]="1">1 hour</option>
-                        <option [ngValue]="6">6 hours</option>
-                        <option [ngValue]="24">1 day</option>
-                    </select>
-                </span></span>                    
+                <span class="row col-8">
+                    <span class="col-2"><label for="aggregatePeriod" class="col-form-label">Aggregate:</label></span>
+                    <span class="col-4">
+                        <select id="aggregatePeriod" class="form-select" [(ngModel)]="aggregateHours" name="aggregatePeriod">
+                            <option [ngValue]="0">None</option>
+                            <option [ngValue]="1">1 hour</option>
+                            <option [ngValue]="6">6 hours</option>
+                            <option [ngValue]="24">1 day</option>
+                        </select>
+                    </span>
+                    <span class="col-2">
+                        <label for="displayType" class="col-form-label">Display:</label>
+                    </span>
+                    <span class="col-4">
+                        <select name="displayType" id="displayType" class="form-select" [(ngModel)]="displayMode">
+                            <option value="temp">Temperature</option>
+                            <option value="humidity">Humidity</option>
+                            <option value="both">Both</option>
+                        </select>
+                    </span>
+                </span>                    
             </form>
         </filter-panel>
     </div>

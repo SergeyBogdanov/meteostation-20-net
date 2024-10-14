@@ -47,6 +47,8 @@ const tempreratureSelector: DataSelector = (rawItem: RawMeasureData) => rawItem.
 
 const humiditySelector: DataSelector = (rawItem: RawMeasureData) => rawItem.humidity;
 
+type DisplayModeType = 'temp' | 'humidity' | 'both';
+
 @Component({
     selector: 'temperature-details-page',
     standalone: true,
@@ -67,6 +69,14 @@ export class TemperatureDetailsPageComponent {
     }
     set aggregateHours(newValue: number) {
         this._aggregateHours = newValue;
+        this.aggregateData();
+    }
+    _displayMode: DisplayModeType = 'temp';
+    get displayMode() : DisplayModeType {
+        return this._displayMode;
+    }
+    set displayMode(newValue: DisplayModeType) {
+        this._displayMode = newValue;
         this.aggregateData();
     }
     private rawData: RawMeasureData[] = [];
@@ -94,6 +104,7 @@ export class TemperatureDetailsPageComponent {
     }
 
     private aggregateData(): void {
+        this.dataSelectorProc = this.displayMode == 'temp' ? tempreratureSelector : humiditySelector;
         if (this.aggregateHours === 0) {
             this.chartData = this.rawData.map(item => this.dataSelectorProc(item));
             this.commonLabels = this.rawData.map(item => item.timestamp.toISOString());
