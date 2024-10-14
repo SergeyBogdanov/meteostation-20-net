@@ -117,12 +117,12 @@ export class TemperatureDetailsPageComponent {
 
     private displayManyAxisData(): void {
         this.chartData =  [
-            this.rawData.map(item => tempreratureSelector(item)),
-            this.rawData.map(item => humiditySelector(item))];
+            this.rawData.map(item => humiditySelector(item)),
+            this.rawData.map(item => tempreratureSelector(item))];
         this.commonLabels = this.rawData.map(item => item.timestamp.toISOString());
         this.chartOptions = {axisOptions: [
-            new AxisOptionsImpl('Temperature', 'temp'), 
-            new AxisOptionsImpl('Humidity', 'humidity')]};
+            new AxisOptionsImpl('Humidity', 'humidity'),
+            new AxisOptionsImpl('Temperature', 'temp')]};
     }
 
     private displaySingleAxisData(): void {
