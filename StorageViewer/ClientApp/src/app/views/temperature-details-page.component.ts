@@ -83,6 +83,9 @@ export class TemperatureDetailsPageComponent {
         this._displayMode = newValue;
         this.aggregateData();
     }
+    get titleSourceName() : string {
+        return this.type === 'inner' ? 'Indoor' : 'Outdoor';
+    }
     private rawData: RawMeasureData[] = [];
     private dataExtractor: DataExtractor = outdoorDataExtractor;
 

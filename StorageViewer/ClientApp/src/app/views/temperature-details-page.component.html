@@ -4,7 +4,7 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <filter-panel title="Request temperature data">
+        <filter-panel [title]="'Request temperature & humidity data (' + titleSourceName + ')'">
             <form class="row row-cols-auto">
                 <span class="row col-8"><span class="col-2"><label for="fromDuration" class="col-form-label">For the last:</label></span><span class="col-10">
                     <select id="fromDuration" class="form-select" [(ngModel)]="periodDuration" name="fromDuration">
