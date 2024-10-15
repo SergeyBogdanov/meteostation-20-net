@@ -85,7 +85,6 @@ export class TemperatureDetailsPageComponent {
     }
     private rawData: RawMeasureData[] = [];
     private dataExtractor: DataExtractor = outdoorDataExtractor;
-    private dataSelectorProc: DataSelector = tempreratureSelector;
 
     constructor(private historyService: HistoryService) {}
 
@@ -116,25 +115,33 @@ export class TemperatureDetailsPageComponent {
     }
 
     private displayManyAxisData(): void {
-        this.chartData =  [
-            this.rawData.map(item => humiditySelector(item)),
-            this.rawData.map(item => tempreratureSelector(item))];
-        this.commonLabels = this.rawData.map(item => item.timestamp.toISOString());
+        if (this.aggregateHours === 0) {
+                this.chartData =  [
+                this.rawData.map(item => humiditySelector(item)),
+                this.rawData.map(item => tempreratureSelector(item))];
+            this.commonLabels = this.rawData.map(item => item.timestamp.toISOString());
+        } else {
+            const aggregatedTemp = this.aggregateByProc('avg', tempreratureSelector);
+            this.chartData =  [
+                this.aggregateByProc('avg', humiditySelector).map(item => item.calculatedResult),
+                aggregatedTemp.map(item => item.calculatedResult)];
+            this.commonLabels = aggregatedTemp.map(item => item.timestamp.toISOString());
+        }
         this.chartOptions = {axisOptions: [
             new AxisOptionsImpl('Humidity', 'humidity'),
             new AxisOptionsImpl('Temperature', 'temp')]};
     }
 
     private displaySingleAxisData(): void {
-        this.dataSelectorProc = this.displayMode == 'temp' ? tempreratureSelector : humiditySelector;
+        const dataSelectorProc: DataSelector = this.displayMode == 'temp' ? tempreratureSelector : humiditySelector;
         if (this.aggregateHours === 0) {
-            this.chartData = this.rawData.map(item => this.dataSelectorProc(item));
+            this.chartData = this.rawData.map(item => dataSelectorProc(item));
             this.commonLabels = this.rawData.map(item => item.timestamp.toISOString());
             this.chartOptions = {};
         } else {
-            const aggregatedAvg = this.aggregateByProc('avg');
-            this.chartData = [ this.aggregateByProc('min').map(item => item.calculatedResult), 
-                                this.aggregateByProc('max').map(item => item.calculatedResult),
+            const aggregatedAvg = this.aggregateByProc('avg', dataSelectorProc);
+            this.chartData = [ this.aggregateByProc('min', dataSelectorProc).map(item => item.calculatedResult), 
+                                this.aggregateByProc('max', dataSelectorProc).map(item => item.calculatedResult),
                                 aggregatedAvg.map(item => item.calculatedResult)
                             ];
             this.commonLabels = aggregatedAvg.map(item => item.timestamp.toISOString());
@@ -145,10 +152,10 @@ export class TemperatureDetailsPageComponent {
         }
     }
 
-    private aggregateByProc(aggregationType: AggregationType): AggregatedResult[] {
+    private aggregateByProc(aggregationType: AggregationType, selectProc: DataSelector): AggregatedResult[] {
         const aggregator = new HoursAggregator(this.aggregateHours);
         aggregator.type = aggregationType;
-        this.rawData.forEach(item => aggregator.addData(item.timestamp, this.dataSelectorProc(item)));
+        this.rawData.forEach(item => aggregator.addData(item.timestamp, selectProc(item)));
         return aggregator.aggregate();
     }
 }
