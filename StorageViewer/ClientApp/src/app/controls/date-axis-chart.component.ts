@@ -76,8 +76,13 @@ export class DateAxisChartComponent {
         };
         const groupedByAxisId = _.groupBy(extractedData, data => data.axisId);
         const axisMinLevels = _.transform(groupedByAxisId, (result: any, rawSet, axisId) => result[axisId] = this.extractMinLevel(rawSet), {});
+        this.chartOptions.scales = {
+            xAxis: {
+                type: "time"
+            }
+        };
         for(let axisId in axisMinLevels) {
-            this.chartOptions.scales['yAxis'] = (!_.isUndefined(axisMinLevels[axisId])) ? { min: axisMinLevels[axisId] } : {};
+            this.chartOptions.scales[axisId] = (!_.isUndefined(axisMinLevels[axisId])) ? { min: axisMinLevels[axisId] } : {};
         }
         this.chartOptions.plugins.legend.display = (this.chartData.datasets as any[]).find(item => !!item.label) !== undefined;
     }
