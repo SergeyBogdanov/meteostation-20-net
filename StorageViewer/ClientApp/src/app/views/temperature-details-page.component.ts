@@ -7,6 +7,7 @@ import { HistoryService } from "../history/shared/history.service";
 import moment from "moment";
 import { AggregatedResult, AggregationType, HoursAggregator } from "../common/utils/hours-aggregator";
 import { MeteoDataItemModel } from "../history/shared/meteo-data-item.model";
+import { BehaviourRunner, WorkingSubject } from "../common/utils/behaviour-runner";
 
 class RawMeasureData {
     constructor(public timestamp: moment.Moment, public temperature: number, public humidity: number) {}
@@ -60,7 +61,7 @@ class AxisOptionsImpl implements AxisOptions {
     templateUrl: 'temperature-details-page.component.html',
     styleUrl: 'temperature-details-page.component.css'
 })
-export class TemperatureDetailsPageComponent {
+export class TemperatureDetailsPageComponent implements WorkingSubject {
     @Input() type: 'inner' | 'outer' = 'outer';
     working : boolean = false;
     periodDuration: number = 1;
@@ -91,22 +92,23 @@ export class TemperatureDetailsPageComponent {
 
     constructor(private historyService: HistoryService) {}
 
+    ngOnInit() {
+        this.onDataRequest();
+    }
+
     ngOnChanges(changes: SimpleChanges) {
         this.dataExtractor = this.type === 'inner' ? indoorDataExtractor : outdoorDataExtractor;
     }
 
     async onDataRequest() {
-        try {
-            this.working = true;
+        BehaviourRunner.runHeavyOperation(this, async () => {
             const history = await this.historyService.getHistoryForDays(this.periodDuration);
             this.rawData = history.map(item => new RawMeasureData(
                                                             moment(item.recordTimestamp), 
                                                             this.dataExtractor.extractTemperature(item) ?? 0,
                                                             this.dataExtractor.extractHumidity(item) ?? 0));
             this.aggregateData();
-        } finally {
-            this.working = false;
-        }
+        });
     }
 
     private aggregateData(): void {

@@ -6,6 +6,7 @@ import moment from "moment";
 import { HistoryService } from "../history/shared/history.service";
 import { FormsModule } from "@angular/forms";
 import { HoursAggregator } from "../common/utils/hours-aggregator";
+import { BehaviourRunner, WorkingSubject } from "../common/utils/behaviour-runner";
 
 class RawPressureData {
     constructor(public timestamp: moment.Moment, public pressureMmHg: number, public presurrePa: number) {}
@@ -18,7 +19,7 @@ class RawPressureData {
     templateUrl: 'pressure-details-page.component.html',
     styleUrl: 'pressure-details-page.component.css'
 })
-export class PressureDetailsPageComponent {
+export class PressureDetailsPageComponent implements WorkingSubject{
     working : boolean = false;
     periodDuration: number = 1;
     _aggregateHours: number = 0;
@@ -39,18 +40,19 @@ export class PressureDetailsPageComponent {
 
     constructor(private historyService: HistoryService) {}
 
+    ngOnInit() {
+        this.onSearch();
+    }
+
     async onSearch() {
-        try {
-            this.working = true;
+        BehaviourRunner.runHeavyOperation(this, async () => {
             const history = await this.historyService.getHistoryForDays(this.periodDuration);
             this.pressureHistory = history.map(item => new RawPressureData(
                                                             moment(item.recordTimestamp), 
                                                             item.storedData?.pressureMmHg ?? 0, 
                                                             item.storedData?.pressurePa ?? 0));
             this.aggregateData();
-        } finally {
-            this.working = false;
-        }
+        });
     }
 
     private aggregateData(): void {
