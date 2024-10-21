@@ -170,15 +170,12 @@ export class DateAxisChartComponent {
     }
 
     private insertDaysOnBounds(scale: Scale): void {
-        console.log(scale);
         let previousDay: number | undefined = undefined;
         for(let tick of (scale.ticks ?? [])) {
             if (tick.value) {
-                console.log(`Processing: ${tick.label}`, tick);
                 const currentDate = moment(tick.value);
                 const currentDay: number = currentDate.date();
                 if (previousDay && previousDay != currentDay) {
-                    console.log(`-> Updating with: ${currentDate.format('D MMM')}`);
                     this.appendToLabel(tick, currentDate.format('D MMM'));
                     tick.major = true;
                 }
