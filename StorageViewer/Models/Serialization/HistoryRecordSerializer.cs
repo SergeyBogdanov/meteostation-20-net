@@ -18,6 +18,7 @@ internal static class HistoryRecordSerializer
 
     private static DataBlockModel PackDataBlock(DateTimeOffset? timestamp, string? deviceId, HistoryIotData? meteoData) =>
         new DataBlockModel {
+            NativeTimeStamp = timestamp,
             RecordTimestamp = timestamp?.ToString("u") ?? "n/a",
             DeviceId = deviceId ?? "n/a",
             StoredData = new MeteoDataModel {

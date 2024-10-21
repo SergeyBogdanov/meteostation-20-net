@@ -27,6 +27,7 @@ public class HistoryController : ControllerBase
     {
         return [
             new DataBlockModel {
+                NativeTimeStamp = DateTime.UtcNow,
                 DeviceId = "Dev1",
                 RecordTimestamp = DateTime.UtcNow.ToString("u"),
                 StoredData = new MeteoDataModel {
@@ -36,6 +37,7 @@ public class HistoryController : ControllerBase
                 }
             },
             new DataBlockModel {
+                NativeTimeStamp = DateTime.UtcNow,
                 DeviceId = "Dev2",
                 RecordTimestamp = DateTime.UtcNow.ToString("u"),
                 StoredData = new MeteoDataModel {
@@ -57,13 +59,23 @@ public class HistoryController : ControllerBase
             long toNormalizedMs = toDate ?? fromNormalizedMs + DEFAULT_PERIOD_MS;
             long maxDate = Math.Max(fromNormalizedMs, toNormalizedMs);
             long minDate = Math.Min(fromNormalizedMs, toNormalizedMs);
+            DateTimeOffset? lastOffset = null;
             await foreach(var entity in  _historyService.GetHistoryInformation(
                 DateTimeOffset.FromUnixTimeMilliseconds(minDate), 
                 DateTimeOffset.FromUnixTimeMilliseconds(maxDate).AddDays(1)))
             {
+                SetCountinousMarker(entity, lastOffset);
+                lastOffset = entity.NativeTimeStamp ?? lastOffset;
                 yield return entity;
             }
         }
     }
 
+    private void SetCountinousMarker(DataBlockModel entity, DateTimeOffset? lastOffset)
+    {
+        if (((entity.NativeTimeStamp - lastOffset)?.TotalMinutes ?? 0) >= 10)
+        {
+            entity.PreviousEntityMissed = true;
+        }
+    }
 }
