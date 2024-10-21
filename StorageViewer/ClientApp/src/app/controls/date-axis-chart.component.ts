@@ -4,6 +4,7 @@ import "chartjs-adapter-moment";
 import moment from "moment";
 import _ from 'lodash';
 import { isNullOrUndef } from "chart.js/helpers";
+import { Scale, Tick } from "chart.js";
 
 class DataPoint {
     constructor(public x: string, public y: number) {}
@@ -23,8 +24,11 @@ export interface AxisOptions {
 }
 
 export interface DateAxisChartOptions {
+    showDaysBounds?: boolean;
     axisOptions?: AxisOptions[];
 }
+
+const hourRegex = /\d{1,2}(AM)|(PM)/i;
 
 @Component({
     selector: 'date-axis-chart',
@@ -78,7 +82,8 @@ export class DateAxisChartComponent {
         const axisMinLevels = _.transform(groupedByAxisId, (result: any, rawSet, axisId) => result[axisId] = this.extractMinLevel(rawSet), {});
         this.chartOptions.scales = {
             xAxis: {
-                type: "time"
+                type: "time",
+                afterTickToLabelConversion: (scale:Scale) => this.onChartRenderedLabels(scale)
             }
         };
         for(let axisId in axisMinLevels) {
@@ -89,6 +94,12 @@ export class DateAxisChartComponent {
 
     private extractMinLevel(rawSet: RawDataset[]): number | undefined {
         return _.chain(rawSet).map(set => set.buttonLevel).min().value();
+    }
+
+    private onChartRenderedLabels(scale: Scale): void {
+        if ((this.options.showDaysBounds ?? false) && this.hasHourUnits(scale)) {
+            this.insertDaysOnBounds(scale);
+        }
     }
 
     onChartClick() {
@@ -156,5 +167,38 @@ export class DateAxisChartComponent {
         return isNullOrUndef(this.options?.axisOptions?.[index]?.groupId) ?
                 DEFAULT_AXIS_ID :
                 this.options.axisOptions[index].groupId;
+    }
+
+    private insertDaysOnBounds(scale: Scale): void {
+        console.log(scale);
+        let previousDay: number | undefined = undefined;
+        for(let tick of (scale.ticks ?? [])) {
+            if (tick.value) {
+                console.log(`Processing: ${tick.label}`, tick);
+                const currentDate = moment(tick.value);
+                const currentDay: number = currentDate.date();
+                if (previousDay && previousDay != currentDay) {
+                    console.log(`-> Updating with: ${currentDate.format('D MMM')}`);
+                    this.appendToLabel(tick, currentDate.format('D MMM'));
+                    tick.major = true;
+                }
+                previousDay = currentDay;
+            }
+        }
+    }
+
+    private appendToLabel(tick: Tick, extraLabel: string) {
+        if (_.isUndefined(tick.label)) {
+            tick.label = extraLabel;
+        } else if (_.isArray(tick.label)) {
+            tick.label.push(extraLabel);
+        } else {
+            tick.label = [tick.label, extraLabel];
+        }
+    }
+
+    private hasHourUnits(scale: Scale): boolean {
+        return scale.ticks.length > 0 && !Array.isArray(scale.ticks[0].label) &&
+            hourRegex.test((scale.ticks[0].label ?? ''));
     }
 }

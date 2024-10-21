@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { FilterPanelComponent } from "../controls/filter-panel.component";
-import { DateAxisChartComponent, DateAxisChartType } from "../controls/date-axis-chart.component";
+import { DateAxisChartComponent, DateAxisChartOptions, DateAxisChartType } from "../controls/date-axis-chart.component";
 import moment from "moment";
 import { HistoryService } from "../history/shared/history.service";
 import { FormsModule } from "@angular/forms";
@@ -36,6 +36,9 @@ export class PressureDetailsPageComponent implements WorkingSubject{
     }
     pressureData: number[] = [];
     pressureLabels: string[] = [];
+    chartOptions: DateAxisChartOptions = {
+        showDaysBounds: true
+    };
     private pressureHistory: RawPressureData[] = [];
 
     constructor(private historyService: HistoryService) {}

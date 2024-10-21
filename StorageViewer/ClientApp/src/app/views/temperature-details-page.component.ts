@@ -155,6 +155,7 @@ export class TemperatureDetailsPageComponent implements WorkingSubject {
                             new AxisOptionsImpl('Max'), 
                             new AxisOptionsImpl('Avg')]};
         }
+        this.chartOptions.showDaysBounds = true;
     }
 
     private aggregateByProc(aggregationType: AggregationType, selectProc: DataSelector): AggregatedResult[] {
