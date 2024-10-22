@@ -11,14 +11,12 @@ export class StoredMeteoData {
 };
 
 export class MeteoDataItemModel {
-    deviceId: string;
     recordTimestamp: string;
     storedData: StoredMeteoData;
 
-    constructor(deviceId: string, timestamp: string, 
+    constructor(public deviceId: string, timestamp: string, public missedPreviousItem: boolean,
         temperature: number, humidity: number, pressureMmHg: number, pressurePa: number,
         temperatureExternal: number, humidityExternal: number, airQualityInternal: number, eco2Internal: number) {
-        this.deviceId = deviceId;
         this.recordTimestamp = timestamp;
         this.storedData = new StoredMeteoData(temperature, humidity, pressureMmHg, pressurePa,
                                                 temperatureExternal, humidityExternal, airQualityInternal, eco2Internal);

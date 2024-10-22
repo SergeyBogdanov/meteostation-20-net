@@ -1,6 +1,7 @@
 <table class="table table-bordered table-striped" [class.block-busy]="actionInProgress">
     <thead>
         <tr>
+            <th>State</th>
             <th>Device Id</th>
             <th>Timestamp</th>
             <th>Internal Temperature (C)</th>
@@ -17,7 +18,7 @@
             <tr history-item #meteoRowElement [item]="meteoRow" (chosen)="onChosen(meteoRow)"></tr>
         } @empty {
         <tr>
-            <td colspan="9" class="emptyCell">Please select a history period and hit the "Request" button to get data.</td>
+            <td colspan="10" class="emptyCell">Please select a history period and hit the "Request" button to get data.</td>
         </tr>
         }
     </tbody>
