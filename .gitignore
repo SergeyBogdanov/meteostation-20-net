@@ -3,3 +3,4 @@ StorageViewer/bin/
 StorageViewer/obj/
 StorageViewer/ClientApp/.vscode/
 StorageViewer/run.server.bat
+StorageViewer/ClientApp/package-lock.json
