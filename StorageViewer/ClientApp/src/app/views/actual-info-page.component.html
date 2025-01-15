@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">
+    <div class="card-header" i18n="Main screen header">
       Actual Weather Information
     </div>
     <div class="=card-body">
@@ -7,22 +7,22 @@
             <div class="col-4">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title text-primary major-data_title border-bottom border-primary">Indoor</div>
-                        <div class="position-absolute major-data_label">Temperature</div>
+                        <div class="card-title text-primary major-data_title border-bottom border-primary" i18n="Indoor block header">Indoor</div>
+                        <div class="position-absolute major-data_label" i18n="Indoor temperature header">Temperature</div>
                         <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.temperatureInternal">{{ currentInfo?.storedData?.temperatureInternal | number:'1.0-1' }}<span class="major-data_unit">C</span></div>
-                        <div class="position-absolute major-data_label">Humidity</div>
+                        <div class="position-absolute major-data_label" i18n="Indoor humidity header">Humidity</div>
                         <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.humidityInternal">{{ currentInfo?.storedData?.humidityInternal | number:'1.0-1' }}<span class="major-data_unit">%</span></div>
                         <date-axis-chart class="clickable" type="line" [data]="indoorDataBlock" [labels]="dataTimestampLabels" [options]="multiChartOptions" routerLink="../temperature-details/inner"></date-axis-chart>
                         <div class="text-center pb-3">
                             <div class="chart-color-label chart-color-2"></div>
-                            <div class="chart-color-label-text">Temperature</div>
+                            <div class="chart-color-label-text" i18n="Indoor temperature chart label">Temperature</div>
                             <div class="chart-color-label chart-color-1"></div>
-                            <div class="chart-color-label-text">Humidity</div>
+                            <div class="chart-color-label-text" i18n="Indoor humidity chart label">Humidity</div>
                         </div>
                         <div class="border-bottom border-secondary"></div>
-                        <div class="position-absolute major-data_label">Equivalent CO2</div>
-                        <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.eco2Internal">{{ currentInfo?.storedData?.eco2Internal | number:'1.0-1' }}<span class="major-data_unit">Ppm</span></div>
-                        <div class="position-absolute major-data_label">Air Quality</div>
+                        <div class="position-absolute major-data_label" i18n="Indoor eCO2 label">Equivalent CO2</div>
+                        <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.eco2Internal">{{ currentInfo?.storedData?.eco2Internal | number:'1.0-1' }}<span class="major-data_unit" i18n="Indoor eCO2 units label">Ppm</span></div>
+                        <div class="position-absolute major-data_label" i18n="Indoor air quality index label">Air Quality</div>
                         <div class="major-text-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.airQualityInternal">
                             <air-quality [qualityIndex]="currentInfo?.storedData?.airQualityInternal ?? 0" [airQuality]="currentInfo?.storedData?.airQualityInternal ?? 0"></air-quality>
                         </div>
@@ -35,17 +35,17 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <div class="card-title text-primary major-data_title border-bottom border-primary">Outdoor</div>
-                                <div class="position-absolute major-data_label">Temperature</div>
+                                <div class="card-title text-primary major-data_title border-bottom border-primary" i18n="Outdoor block header">Outdoor</div>
+                                <div class="position-absolute major-data_label" i18n="Outdoor temperature header">Temperature</div>
                                 <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.temperatureExternal">{{ currentInfo?.storedData?.temperatureExternal | number:'1.0-1' }}<span class="major-data_unit">C</span></div>
-                                <div class="position-absolute major-data_label">Humidity</div>
+                                <div class="position-absolute major-data_label" i18n="Outdoor humidity header">Humidity</div>
                                 <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.humidityExternal">{{ currentInfo?.storedData?.humidityExternal | number:'1.0-1' }}<span class="major-data_unit">%</span></div>
                                 <date-axis-chart class="clickable" type="line" [data]="outdoorDataBlock" [labels]="dataTimestampLabels" [options]="multiChartOptions" routerLink="../temperature-details/outer"></date-axis-chart>
                                 <div class="text-center">
                                     <div class="chart-color-label chart-color-2"></div>
-                                    <div class="chart-color-label-text">Temperature</div>
+                                    <div class="chart-color-label-text" i18n="Outdoor temperature chart label">Temperature</div>
                                     <div class="chart-color-label chart-color-1"></div>
-                                    <div class="chart-color-label-text">Humidity</div>
+                                    <div class="chart-color-label-text" i18n="Outdoor humidity chart label">Humidity</div>
                                 </div>
                             </div>
                         </div>
@@ -57,13 +57,13 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <div class="card-title text-primary major-data_title border-bottom border-primary">Pressure</div>
-                                <div class="position-absolute major-data_label">Millimetre of Hg</div>
+                                <div class="card-title text-primary major-data_title border-bottom border-primary" i18n="Pressure block header">Pressure</div>
+                                <div class="position-absolute major-data_label" i18n="Pressure in mm of Hg header">Millimetre of Hg</div>
                                 <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.pressureMmHg">{{ currentInfo?.storedData?.pressureMmHg | number:'1.0-1' }}</div>
-                                <div>Normal pressure: 760 mmHg</div>
-                                <div class="position-absolute major-data_label">Kilopascal</div>
+                                <div i18n="Normal pressure in mmHg label">Normal pressure: 760 mmHg</div>
+                                <div class="position-absolute major-data_label" i18n="Pressure in Kilopascals header">Kilopascal</div>
                                 <div class="major-data text-end" [@changeNumberAnimation]="currentInfo?.storedData?.pressurePa">{{ ((currentInfo?.storedData?.pressurePa ?? 0) / 1000) | number:'1.0-1' }}</div>
-                                <div>Normal pressure: 101.3 Kilopascal</div>
+                                <div i18n="Normal pressure in Kilopascals label">Normal pressure: 101.3 Kilopascal</div>
                                 <date-axis-chart class="clickable" type="line" [data]="latestPressureData" [labels]="dataTimestampLabels" routerLink="../pressure-details"></date-axis-chart>
                             </div>
                         </div>
@@ -71,21 +71,20 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <span class="mx-1">Device Id:</span><span class="mx-2">{{ currentInfo?.deviceId }}</span>
+                        <span class="mx-1" i18n="DeviceId label">Device Id:</span><span class="mx-2">{{ currentInfo?.deviceId }}</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col text-end">
-                        <span class="mx-1">Obtained at:</span><span class="mx-2">{{ currentInfo?.recordTimestamp | dateFormatting:'full' }}</span>
+                        <span class="mx-1" i18n="Obtained at label">Obtained at:</span><span class="mx-2">{{ currentInfo?.recordTimestamp | dateFormatting:'full' }}</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col text-end">
-                        <button class="btn btn-outline-secondary" routerLink="../history">Explore history</button>
+                        <button class="btn btn-outline-secondary" routerLink="../history" i18n="Go to history button title">Explore history</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
   </div>
-  
