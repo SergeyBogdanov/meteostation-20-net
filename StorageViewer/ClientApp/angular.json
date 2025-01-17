@@ -55,8 +55,7 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all",
-              "localize": [ "en-US" ]
+              "outputHashing": "all"
             },
             "production-ru": {
               "budgets": [

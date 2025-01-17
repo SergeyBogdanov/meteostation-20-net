@@ -50,7 +50,7 @@ app.UseEndpoints(routeBuilder => routeBuilder.MapDefaultControllerRoute());
 //app.MapControllers();
 
 app.UseSpa(spaBuilder => {
-    spaBuilder.Options.SourcePath = Path.Combine(builder.Environment.ContentRootPath, "client-app/browser", lang);
+    spaBuilder.Options.SourcePath = Path.Combine(builder.Environment.ContentRootPath, "client-app", "browser", lang);
     //spaBuilder.UseAngularCliServer("start");
     if (app.Environment.IsDevelopment())
     {
