@@ -39,7 +39,7 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "localize": ["ru"]
+            "localize": ["en-US", "ru"]
           },
           "configurations": {
             "production": {
@@ -55,7 +55,8 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "localize": [ "en-US" ]
             },
             "production-ru": {
               "budgets": [
@@ -71,7 +72,7 @@
                 }
               ],
               "outputHashing": "all",
-              "localize": [ "en-US" ]
+              "localize": [ "ru" ]
             },
             "development": {
               "optimization": false,
