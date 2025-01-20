@@ -10,10 +10,14 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "en-US",
+        "sourceLocale": {
+          "code": "en-US",
+          "baseHref": ""
+        },
         "locales": {
           "ru": {
-            "translation": "src/locale/messages.ru.xlf"
+            "translation": "src/locale/messages.ru.xlf",
+            "baseHref": ""
           }
         }
       },
@@ -56,22 +60,6 @@
                 }
               ],
               "outputHashing": "all"
-            },
-            "production-ru": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
-                }
-              ],
-              "outputHashing": "all",
-              "localize": [ "ru" ]
             },
             "development": {
               "optimization": false,

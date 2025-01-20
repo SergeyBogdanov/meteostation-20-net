@@ -28,8 +28,7 @@
     <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
       <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
       <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-      <Exec Condition=" '$(MeteoSettings_Building_App_Locale)' == '' " WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
-      <Exec Condition=" '$(MeteoSettings_Building_App_Locale)' != '' " WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production-$(MeteoSettings_Building_App_Locale)" />
+      <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
 
       <!-- Include the newly-built files in the publish output -->
       <ItemGroup>
