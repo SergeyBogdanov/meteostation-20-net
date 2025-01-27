@@ -22,32 +22,32 @@ export class HistoryChartComponent {
         this.originalHistoryRows = val;
         this.chartData = {
             datasets: [{
-                label: 'Pressure (mmHg)',
+                label: $localize`:History chart column|History chart column title:Pressure (mmHg)`,
                 yAxisID: 'pressureHgAxis',
                 data: this.composeDataArray(val, item => item.storedData?.pressureMmHg)
             },
             {
-                label: 'Indoor Humidity (%)',
+                label: $localize`:History chart column|History chart column title:Indoor Humidity (%)`,
                 yAxisID: 'humidityAxis',
                 data: this.composeDataArray(val, item => item.storedData?.humidityInternal)
             },
             {
-                label: 'Outdoor Humidity (%)',
+                label: $localize`:History chart column|History chart column title:Outdoor Humidity (%)`,
                 yAxisID: 'humidityAxis',
                 data: this.composeDataArray(val, item => item.storedData?.humidityExternal)
             },
             {
-                label: 'Indoor Temperature (C)',
+                label: $localize`:History chart column|History chart column title:Indoor Temperature (C)`,
                 yAxisID: 'tempAxis',
                 data: this.composeDataArray(val, item => item.storedData?.temperatureInternal)
             },
             {
-                label: 'Outdoor Temperature (C)',
+                label: $localize`:History chart column|History chart column title:Outdoor Temperature (C)`,
                 yAxisID: 'tempAxis',
                 data: this.composeDataArray(val, item => item.storedData?.temperatureExternal)
             },
             {
-                label: 'eCO2 (ppm)',
+                label: $localize`:History chart column|History chart column title:eCO2 (ppm)`,
                 yAxisID: 'eCo2Axis',
                 data: this.composeDataArray(val, item => (item.storedData?.eco2Internal > 0 ? item.storedData?.eco2Internal : null))
             }]

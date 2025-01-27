@@ -151,7 +151,7 @@ export class DateAxisChartComponent {
             const numericData = data.filter(item => !Number.isNaN(item) && item > 0);
             minAxisValue = Math.min(...numericData);
             if (Number.isFinite(minAxisValue)) {
-                const minValuePadding = ((Math.max(...numericData) - minAxisValue) * 0.10) ?? 10;
+                const minValuePadding = (Math.max(...numericData) - minAxisValue) * 0.10;
                 minAxisValue -= minValuePadding;
             }
         }

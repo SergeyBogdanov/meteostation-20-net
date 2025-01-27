@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="422765708518354441" datatype="html">
+        <source>Excelent</source>
+        <target>Отлично</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/controls/air-quality.component.html</context>
+          <context context-type="linenumber">2,4</context>
+        </context-group>
+        <note priority="1" from="description">Air quality index excelent title</note>
+      </trans-unit>
+      <trans-unit id="29167121133682512" datatype="html">
+        <source>Good</source>
+        <target>Хорошо</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/controls/air-quality.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+        <note priority="1" from="description">Air quality index good title</note>
+      </trans-unit>
+      <trans-unit id="3080483882937310852" datatype="html">
+        <source>Normal</source>
+        <target>Нормально</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/controls/air-quality.component.html</context>
+          <context context-type="linenumber">6,8</context>
+        </context-group>
+        <note priority="1" from="description">Air quality index normal title</note>
+      </trans-unit>
+      <trans-unit id="8767957606064036733" datatype="html">
+        <source>Bad</source>
+        <target>Плохо</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/controls/air-quality.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <note priority="1" from="description">Air quality index bad title</note>
+      </trans-unit>
+      <trans-unit id="3426107152168410093" datatype="html">
+        <source>Dangerous</source>
+        <target>Опасно</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/controls/air-quality.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+        <note priority="1" from="description">Air quality index dangerous title</note>
+      </trans-unit>
+      <trans-unit id="6811901802533648897" datatype="html">
+        <source>N/A</source>
+        <target>Нет данных</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/controls/air-quality.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+        <note priority="1" from="description">Air quality index unavailable title</note>
+      </trans-unit>
+      <trans-unit id="6975267001458254622" datatype="html">
+        <source>Show charts:</source>
+        <target>Показать для датчиков:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-chart.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+        <note priority="1" from="description">Charts quick control label</note>
+      </trans-unit>
+      <trans-unit id="4654275562391494604" datatype="html">
+        <source>Indoor</source>
+        <target>Внутренних</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-chart.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+        <note priority="1" from="description">Charts quick control button title</note>
+        <note priority="1" from="meaning">Quick control button title</note>
+      </trans-unit>
+      <trans-unit id="183947946552713708" datatype="html">
+        <source>Outdoor</source>
+        <target>Внешних</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-chart.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+        <note priority="1" from="description">Charts quick control button title</note>
+        <note priority="1" from="meaning">Quick control button title</note>
+      </trans-unit>
+      <trans-unit id="8688812255270857992" datatype="html">
+        <source>All</source>
+        <target>Всех</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-chart.component.html</context>
+          <context context-type="linenumber">7,10</context>
+        </context-group>
+        <note priority="1" from="description">Charts quick control button title</note>
+        <note priority="1" from="meaning">Quick control button title</note>
+      </trans-unit>
+      <trans-unit id="1972283096122025710" datatype="html">
+        <source>Pressure (mmHg)</source>
+        <target>Давление (мм рт. ст.)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-chart.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <note priority="1" from="description">History chart column title</note>
+        <note priority="1" from="meaning">History chart column</note>
+      </trans-unit>
+      <trans-unit id="9019714774998699920" datatype="html">
+        <source>Indoor Humidity (%)</source>
+        <target>Внут. влажность (%)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-chart.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <note priority="1" from="description">History chart column title</note>
+        <note priority="1" from="meaning">History chart column</note>
+      </trans-unit>
+      <trans-unit id="3050856081378525290" datatype="html">
+        <source>Outdoor Humidity (%)</source>
+        <target>Внеш. влажность (%)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-chart.component.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <note priority="1" from="description">History chart column title</note>
+        <note priority="1" from="meaning">History chart column</note>
+      </trans-unit>
+      <trans-unit id="3432804099241707412" datatype="html">
+        <source>Indoor Temperature (C)</source>
+        <target>Внут. температура (C)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-chart.component.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <note priority="1" from="description">History chart column title</note>
+        <note priority="1" from="meaning">History chart column</note>
+      </trans-unit>
+      <trans-unit id="1052863038953517646" datatype="html">
+        <source>Outdoor Temperature (C)</source>
+        <target>Внешю темпаратура (C)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-chart.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <note priority="1" from="description">History chart column title</note>
+        <note priority="1" from="meaning">History chart column</note>
+      </trans-unit>
+      <trans-unit id="4679363725833594804" datatype="html">
+        <source>eCO2 (ppm)</source>
+        <target>eCO2 (ppm)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-chart.component.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <note priority="1" from="description">History chart column title</note>
+        <note priority="1" from="meaning">History chart column</note>
+      </trans-unit>
+      <trans-unit id="5911214550882917183" datatype="html">
+        <source>State</source>
+        <target>Статус</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+        <note priority="1" from="description">Header in history data table</note>
+      </trans-unit>
+      <trans-unit id="594619767042507380" datatype="html">
+        <source>Device Id</source>
+        <target>Device Id</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+        <note priority="1" from="description">Header in history data table</note>
+      </trans-unit>
+      <trans-unit id="5667900632592970266" datatype="html">
+        <source>Timestamp</source>
+        <target>Время</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+        <note priority="1" from="description">Header in history data table</note>
+      </trans-unit>
+      <trans-unit id="1858582489439330716" datatype="html">
+        <source>Internal Temperature (C)</source>
+        <target>Внутренняя температура (C)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+        <note priority="1" from="description">Header in history data table</note>
+      </trans-unit>
+      <trans-unit id="1582873899069262146" datatype="html">
+        <source>Internal Humidity (%)</source>
+        <target>Внутренняя влажность (%)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <note priority="1" from="description">Header in history data table</note>
+      </trans-unit>
+      <trans-unit id="1866568735743788701" datatype="html">
+        <source>External Temperature (C)</source>
+        <target>Внешняя температура (C)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <note priority="1" from="description">Header in history data table</note>
+      </trans-unit>
+      <trans-unit id="1211379297920257688" datatype="html">
+        <source>External Humidity (%)</source>
+        <target>Внешняя влажность (%)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+        <note priority="1" from="description">Header in history data table</note>
+      </trans-unit>
+      <trans-unit id="3048686591023934707" datatype="html">
+        <source>CO2 Level (Ppm)</source>
+        <target>Уровень CO2 (ppm)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <note priority="1" from="description">Header in history data table</note>
+      </trans-unit>
+      <trans-unit id="3772435864134985543" datatype="html">
+        <source>Air Quality Index</source>
+        <target>Индекс качества воздуха</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+        <note priority="1" from="description">Header in history data table</note>
+      </trans-unit>
+      <trans-unit id="7746499722799582670" datatype="html">
+        <source>Pressure (mm Hg)</source>
+        <target>Давление (мм рт. ст.)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">13,16</context>
+        </context-group>
+        <note priority="1" from="description">Header in history data table</note>
+      </trans-unit>
+      <trans-unit id="1208955257340313222" datatype="html">
+        <source>Please select a history period and hit the &quot;Request&quot; button to get data.</source>
+        <target>Для получения данных выберите нужный период и нажмите кнопку &quot;Запросить&quot;</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-list.component.html</context>
+          <context context-type="linenumber">21,24</context>
+        </context-group>
+        <note priority="1" from="description">Prompt in history data table</note>
+      </trans-unit>
+      <trans-unit id="1358239534403218079" datatype="html">
+        <source>Table</source>
+        <target>Таблица</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-search.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+        <note priority="1" from="description">Table switch label on history search</note>
+      </trans-unit>
+      <trans-unit id="7798195225890418363" datatype="html">
+        <source>Chart</source>
+        <target>График</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history-search.component.html</context>
+          <context context-type="linenumber">7,10</context>
+        </context-group>
+        <note priority="1" from="description">Chart switch label on history search</note>
+      </trans-unit>
+      <trans-unit id="8239592449375701371" datatype="html">
+        <source> Actual Weather Information </source>
+        <target> Текущие данные</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+        <note priority="1" from="description">Main screen header</note>
+      </trans-unit>
+      <trans-unit id="8822206448271061589" datatype="html">
+        <source>Indoor</source>
+        <target>Внутренний датчик</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+        <note priority="1" from="description">Indoor block header</note>
+      </trans-unit>
+      <trans-unit id="2592368582911584624" datatype="html">
+        <source>Temperature</source>
+        <target>Температура</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+        <note priority="1" from="description">Indoor temperature header</note>
+      </trans-unit>
+      <trans-unit id="1403671235176659940" datatype="html">
+        <source>Humidity</source>
+        <target>Влажность</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">20,22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">48,49</context>
+        </context-group>
+        <note priority="1" from="description">Indoor humidity header</note>
+      </trans-unit>
+      <trans-unit id="2435093866471115183" datatype="html">
+        <source>Equivalent CO2</source>
+        <target>Эквивалентное значение СО2</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+        <note priority="1" from="description">Indoor eCO2 label</note>
+      </trans-unit>
+      <trans-unit id="6090482484686032706" datatype="html">
+        <source>Ppm</source>
+        <target>ppm</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <note priority="1" from="description">Indoor eCO2 units label</note>
+      </trans-unit>
+      <trans-unit id="2087590503642194507" datatype="html">
+        <source>Air Quality</source>
+        <target>Индекс качества воздуха</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">25,26</context>
+        </context-group>
+        <note priority="1" from="description">Indoor air quality index label</note>
+      </trans-unit>
+      <trans-unit id="1975356621924283237" datatype="html">
+        <source>Outdoor</source>
+        <target>Внешний датчик</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+        <note priority="1" from="description">Outdoor block header</note>
+      </trans-unit>
+      <trans-unit id="1265112965770921029" datatype="html">
+        <source>Pressure</source>
+        <target>Давление</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
+        <note priority="1" from="description">Pressure block header</note>
+      </trans-unit>
+      <trans-unit id="2445460766838318726" datatype="html">
+        <source>Millimetre of Hg</source>
+        <target>В мм ртутного столба</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">61,62</context>
+        </context-group>
+        <note priority="1" from="description">Pressure in mm of Hg header</note>
+      </trans-unit>
+      <trans-unit id="7683457842912748281" datatype="html">
+        <source>Normal pressure: 760 mmHg</source>
+        <target>Нормальное давление: 760 мм рт. ст.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">63,64</context>
+        </context-group>
+        <note priority="1" from="description">Normal pressure in mmHg label</note>
+      </trans-unit>
+      <trans-unit id="3110537176629985548" datatype="html">
+        <source>Kilopascal</source>
+        <target>В килопаскалях</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">64,65</context>
+        </context-group>
+        <note priority="1" from="description">Pressure in Kilopascals header</note>
+      </trans-unit>
+      <trans-unit id="4176725399319159848" datatype="html">
+        <source>Normal pressure: 101.3 Kilopascal</source>
+        <target>Нормальное давление: 101.3 кПа</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">66,67</context>
+        </context-group>
+        <note priority="1" from="description">Normal pressure in Kilopascals label</note>
+      </trans-unit>
+      <trans-unit id="6563272497586610465" datatype="html">
+        <source>Device Id:</source>
+        <target>Device Id:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <note priority="1" from="description">DeviceId label</note>
+      </trans-unit>
+      <trans-unit id="8675130129674385548" datatype="html">
+        <source>Obtained at:</source>
+        <target>Обновлено:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+        <note priority="1" from="description">Obtained at label</note>
+      </trans-unit>
+      <trans-unit id="8226054228301779422" datatype="html">
+        <source>Explore history</source>
+        <target>История измерений</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/actual-info-page.component.html</context>
+          <context context-type="linenumber">84,86</context>
+        </context-group>
+        <note priority="1" from="description">Go to history button title</note>
+      </trans-unit>
+      <trans-unit id="7783971253981265116" datatype="html">
+        <source>&lt;&lt; Back to actual</source>
+        <target>&lt;&lt; На главную</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/history-page.component.html</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">3,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">3,6</context>
+        </context-group>
+        <note priority="1" from="description">Back button on history page</note>
+      </trans-unit>
+      <trans-unit id="5487630018331375668" datatype="html">
+        <source>From:</source>
+        <target>От:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/history-page.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">Duration From control label</note>
+      </trans-unit>
+      <trans-unit id="5752829569732845992" datatype="html">
+        <source>To:</source>
+        <target>До:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/history-page.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">Duration To control label</note>
+      </trans-unit>
+      <trans-unit id="6170082236603228916" datatype="html">
+        <source>Request</source>
+        <target>Запросить</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/history-page.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description">Duration filter request button title</note>
+      </trans-unit>
+      <trans-unit id="4230851849223123475" datatype="html">
+        <source>Request pressure data</source>
+        <target>Информация об атмосферном давлении</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">Title of data request panel on pressure details page</note>
+      </trans-unit>
+      <trans-unit id="5402046884570904180" datatype="html">
+        <source>For the last:</source>
+        <target>За период:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">Duration filter label</note>
+      </trans-unit>
+      <trans-unit id="4776429682428363094" datatype="html">
+        <source>1 day</source>
+        <target>1 день</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <note priority="1" from="description">Duration filter option 1 day</note>
+      </trans-unit>
+      <trans-unit id="867108466740792122" datatype="html">
+        <source>3 days</source>
+        <target>3 дня</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+        <note priority="1" from="description">Duration filter option 3 days</note>
+      </trans-unit>
+      <trans-unit id="5141352019990967744" datatype="html">
+        <source>Week</source>
+        <target>Неделя</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+        <note priority="1" from="description">Duration filter option 7 days</note>
+      </trans-unit>
+      <trans-unit id="6655064069957514927" datatype="html">
+        <source>2 Weeks</source>
+        <target>2 недели</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+        <note priority="1" from="description">Duration filter option 14 days</note>
+      </trans-unit>
+      <trans-unit id="6937555734831295829" datatype="html">
+        <source>Aggregate data</source>
+        <target>Отображение данных</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <note priority="1" from="description">Title of aggregate control panel on pressure details page</note>
+      </trans-unit>
+      <trans-unit id="1782141684845592210" datatype="html">
+        <source>Aggregate:</source>
+        <target>Агрегировать:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+        <note priority="1" from="description">Aggregation options dropbox label</note>
+      </trans-unit>
+      <trans-unit id="9039156774485942589" datatype="html">
+        <source>None</source>
+        <target>Без агрегации</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+        <note priority="1" from="description">Aggregation option none</note>
+        <note priority="1" from="meaning">Aggregate option</note>
+      </trans-unit>
+      <trans-unit id="7035142081393095101" datatype="html">
+        <source>1 hour</source>
+        <target>По 1 часу</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+        <note priority="1" from="description">Aggregation option none</note>
+        <note priority="1" from="meaning">Aggregate option</note>
+      </trans-unit>
+      <trans-unit id="4636357768976962753" datatype="html">
+        <source>3 hours</source>
+        <target>По 3 часа</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+        <note priority="1" from="description">Aggregation option none</note>
+        <note priority="1" from="meaning">Aggregate option</note>
+      </trans-unit>
+      <trans-unit id="5549727464847706819" datatype="html">
+        <source>6 hours</source>
+        <target>По 6 часов</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+        <note priority="1" from="description">Aggregation option none</note>
+        <note priority="1" from="meaning">Aggregate option</note>
+      </trans-unit>
+      <trans-unit id="7837354239892701539" datatype="html">
+        <source>12 hours</source>
+        <target>По 12 часов</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+        <note priority="1" from="description">Aggregation option none</note>
+        <note priority="1" from="meaning">Aggregate option</note>
+      </trans-unit>
+      <trans-unit id="6087875826090656718" datatype="html">
+        <source>1 day</source>
+        <target>По 1 дню</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/pressure-details-page.component.html</context>
+          <context context-type="linenumber">33,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">33,35</context>
+        </context-group>
+        <note priority="1" from="description">Aggregation option none</note>
+        <note priority="1" from="meaning">Aggregate option</note>
+      </trans-unit>
+      <trans-unit id="3831573943106045577" datatype="html">
+        <source>Aggregate &amp; display data</source>
+        <target>Отображение данных</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <note priority="1" from="description">Title of aggregate control panel on temp details page</note>
+      </trans-unit>
+      <trans-unit id="5041638552665426065" datatype="html">
+        <source>Display:</source>
+        <target>Отображать:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">37,39</context>
+        </context-group>
+        <note priority="1" from="description">Display options dropbox label</note>
+      </trans-unit>
+      <trans-unit id="7984394522584455197" datatype="html">
+        <source>Temperature</source>
+        <target>Температуру</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+        <note priority="1" from="description">Display option temperature</note>
+        <note priority="1" from="meaning">Aggregate temperature option</note>
+      </trans-unit>
+      <trans-unit id="2617638430458673410" datatype="html">
+        <source>Humidity</source>
+        <target>Влажность</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">42,43</context>
+        </context-group>
+        <note priority="1" from="description">Display option humidity</note>
+        <note priority="1" from="meaning">Aggregate humidity option</note>
+      </trans-unit>
+      <trans-unit id="7735950074219703319" datatype="html">
+        <source>Both</source>
+        <target>Оба показателя</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.html</context>
+          <context context-type="linenumber">43,45</context>
+        </context-group>
+        <note priority="1" from="description">Display option both</note>
+        <note priority="1" from="meaning">Aggregate both option</note>
+      </trans-unit>
+      <trans-unit id="706464806604004013" datatype="html">
+        <source>
+          Request temperature &amp; humidity data (<x id="PH" equiv-text="this.titleSourceName"/>)
+        </source>
+        <target>Информация о температуре и влажности (<x id="PH" equiv-text="this.titleSourceName"/>)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/views/temperature-details-page.component.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+        <note priority="1" from="description">Title of data request panel on temp details page</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

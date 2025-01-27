@@ -84,8 +84,11 @@ export class TemperatureDetailsPageComponent implements WorkingSubject {
         this._displayMode = newValue;
         this.aggregateData();
     }
+    get titleFilterPanel(): string {
+        return $localize`:Title of data request panel on temp details page:Request temperature & humidity data (${this.titleSourceName})`;
+    }
     get titleSourceName() : string {
-        return this.type === 'inner' ? 'Indoor' : 'Outdoor';
+      return this.type === 'inner' ? $localize`:Remark for indoor sensors title:Indoor` : $localize`:Remark for outdoor sensors title:Outdoor`;
     }
     private rawData: RawMeasureData[] = [];
     private dataExtractor: DataExtractor = outdoorDataExtractor;
@@ -133,8 +136,8 @@ export class TemperatureDetailsPageComponent implements WorkingSubject {
             this.commonLabels = aggregatedTemp.map(item => item.timestamp.toISOString());
         }
         this.chartOptions = {axisOptions: [
-            new AxisOptionsImpl('Humidity', 'humidity'),
-            new AxisOptionsImpl('Temperature', 'temp')]};
+          new AxisOptionsImpl($localize`:Chart data series label for humidity:Humidity`, 'humidity'),
+          new AxisOptionsImpl($localize`:Chart data series label for temperature:Temperature`, 'temp')]};
     }
 
     private displaySingleAxisData(): void {

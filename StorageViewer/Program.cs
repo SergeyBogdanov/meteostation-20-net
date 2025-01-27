@@ -9,9 +9,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddDependencies();
 
+string? lang = Environment.GetEnvironmentVariable("MeteoSettings_Building_App_Locale");
+lang = string.IsNullOrEmpty(lang) ? "en-US" : lang;
+
 builder.Services.AddSpaStaticFiles(configuration =>
 {
-    configuration.RootPath = "wwwroot/client-app/browser";
+    configuration.RootPath = $"wwwroot/client-app/browser/{lang}";
 });
 
 builder.Services.AddHostedService<ExternalListenerService>();
@@ -47,7 +50,7 @@ app.UseEndpoints(routeBuilder => routeBuilder.MapDefaultControllerRoute());
 //app.MapControllers();
 
 app.UseSpa(spaBuilder => {
-    spaBuilder.Options.SourcePath = Path.Combine(builder.Environment.ContentRootPath, "client-app/browser");
+    spaBuilder.Options.SourcePath = Path.Combine(builder.Environment.ContentRootPath, "client-app", "browser", lang);
     //spaBuilder.UseAngularCliServer("start");
     if (app.Environment.IsDevelopment())
     {
