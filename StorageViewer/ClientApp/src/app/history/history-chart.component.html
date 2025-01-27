@@ -1,9 +1,9 @@
 <canvas #mainChart baseChart type="line" [data]="chartData" [options]="chartOptions"></canvas>
 <div class="row">
     <div class="col-12">
-        <span class="mx-1">Show charts:</span>
-        <button class="btn btn-outline-secondary mx-2" (click)="showIndoor()">Indoor</button>
-        <button class="btn btn-outline-secondary mx-2" (click)="showOutdoor()">Outdoor</button>
-        <button class="btn btn-outline-secondary mx-2" (click)="showAll()">All</button>
+        <span class="mx-1" i18n="Charts quick control label">Show charts:</span>
+        <button class="btn btn-outline-secondary mx-2" (click)="showIndoor()" i18n="Quick control button title|Charts quick control button title">Indoor</button>
+        <button class="btn btn-outline-secondary mx-2" (click)="showOutdoor()" i18n="Quick control button title|Charts quick control button title">Outdoor</button>
+        <button class="btn btn-outline-secondary mx-2" (click)="showAll()" i18n="Quick control button title|Charts quick control button title">All</button>
     </div>
 </div>

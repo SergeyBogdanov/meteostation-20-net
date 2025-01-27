@@ -1,46 +1,46 @@
 <div class="row">
     <div class="col-10"></div>
-    <div class="col-2 text-end"><button class="btn btn-outline-secondary" routerLink="../../actual"><< Back to actual</button></div>
+    <div class="col-2 text-end"><button class="btn btn-outline-secondary" routerLink="../../actual" i18n="Back button on temp details page"><< Back to actual</button></div>
 </div>
 <div class="row">
     <div class="col-12">
-        <filter-panel [title]="'Request temperature & humidity data (' + titleSourceName + ')'">
+        <filter-panel [title]="titleFilterPanel" i18n-titl="Title of data request panel on temp details page">
             <form class="row row-cols-auto">
-                <span class="row col-8"><span class="col-2"><label for="fromDuration" class="col-form-label">For the last:</label></span><span class="col-10">
+                <span class="row col-8"><span class="col-2"><label for="fromDuration" class="col-form-label" i18n="Duration filter label">For the last:</label></span><span class="col-10">
                     <select id="fromDuration" class="form-select" [(ngModel)]="periodDuration" name="fromDuration">
-                        <option [ngValue]="1">1 day</option>
-                        <option [ngValue]="3">3 days</option>
-                        <option [ngValue]="7">Week</option>
-                        <option [ngValue]="14">2 Weeks</option>
+                        <option [ngValue]="1" i18n="Duration filter option 1 day">1 day</option>
+                        <option [ngValue]="3" i18n="Duration filter option 3 days">3 days</option>
+                        <option [ngValue]="7" i18n="Duration filter option 7 days">Week</option>
+                        <option [ngValue]="14" i18n="Duration filter option 14 days">2 Weeks</option>
                     </select>
                 </span></span>
-                <span class="col-4"><input type="button" (click)="onDataRequest()" value="Request" [disabled]="working" class="btn btn-primary"/></span>
+                <span class="col-4"><input type="button" (click)="onDataRequest()" i18n-value="Duration filter request button title" value="Request" [disabled]="working" class="btn btn-primary"/></span>
             </form>
         </filter-panel>
     </div>
 </div>
 <div class="row">
     <div class="col-12">
-        <filter-panel title="Aggregate & display data">
+        <filter-panel title="Aggregate & display data" i18n-title="Title of aggregate control panel on temp details page">
             <form class="row row-cols auto">
                 <span class="row col-8">
-                    <span class="col-2"><label for="aggregatePeriod" class="col-form-label">Aggregate:</label></span>
+                    <span class="col-2"><label for="aggregatePeriod" class="col-form-label" i18n="Aggregation options dropbox label">Aggregate:</label></span>
                     <span class="col-4">
                         <select id="aggregatePeriod" class="form-select" [(ngModel)]="aggregateHours" name="aggregatePeriod">
-                            <option [ngValue]="0">None</option>
-                            <option [ngValue]="1">1 hour</option>
-                            <option [ngValue]="6">6 hours</option>
-                            <option [ngValue]="24">1 day</option>
+                            <option [ngValue]="0" i18n="Aggregate option|Aggregation option none">None</option>
+                            <option [ngValue]="1" i18n="Aggregate option|Aggregation option 1 hour">1 hour</option>
+                            <option [ngValue]="6" i18n="Aggregate option|Aggregation option 6 hours">6 hours</option>
+                            <option [ngValue]="24" i18n="Aggregate option|Aggregation option 24 hours">1 day</option>
                         </select>
                     </span>
                     <span class="col-2">
-                        <label for="displayType" class="col-form-label">Display:</label>
+                        <label for="displayType" class="col-form-label" i18n="Display options dropbox label">Display:</label>
                     </span>
                     <span class="col-4">
                         <select name="displayType" id="displayType" class="form-select" [(ngModel)]="displayMode">
-                            <option value="temp">Temperature</option>
-                            <option value="humidity">Humidity</option>
-                            <option value="both">Both</option>
+                            <option value="temp" i18n="Aggregate temperature option|Display option temperature">Temperature</option>
+                            <option value="humidity" i18n="Aggregate humidity option|Display option humidity">Humidity</option>
+                            <option value="both" i18n="Aggregate both option|Display option both">Both</option>
                         </select>
                     </span>
                 </span>                    
